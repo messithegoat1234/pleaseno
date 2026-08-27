@@ -33,9 +33,15 @@ def home():
 def serve_file(filename):
     return send_from_directory(".", filename)
     
+import time
+
 @app.route("/products")
 def show_products():
+    start = time.time()
+
     connect = get_db()
+    print("DB CONNECT:", time.time() - start)
+
     cursor = connect.cursor()
 
     cursor.execute("""
@@ -55,8 +61,12 @@ def show_products():
 
     result = cursor.fetchall()
 
+    print("QUERY:", time.time() - start)
+
     cursor.close()
     connect.close()
+
+    print("TOTAL:", time.time() - start)
 
     return jsonify([
         {
@@ -67,7 +77,7 @@ def show_products():
             "imageback": row[4]
         }
         for row in result
-    ])  
+    ])
 
 @app.route("/products/<website_name>")
 def get_product(website_name):
