@@ -4,7 +4,7 @@ async function showProduct() {
     const websiteName = parts[parts.length - 1];
 
     let res = await fetch(
-        `/products/${websiteName}`
+        `https://pleaseno.onrender.com/products/${websiteName}`
     );
 
     let data = await res.json();
