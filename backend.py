@@ -1,5 +1,5 @@
 import re
-from flask import Flask, request, jsonify, session
+from flask import Flask, request, jsonify, session, send_from_directory
 import bcrypt
 from flask_cors import CORS
 import mysql.connector
@@ -25,6 +25,14 @@ def get_db():
         ssl_ca=os.path.join(os.path.dirname(__file__), "ca.pem")
     )
 
+@app.route("/")
+def home():
+    return send_from_directory(".", "index.html")
+
+@app.route("/<path:filename>")
+def serve_file(filename):
+    return send_from_directory(".", filename)
+    
 @app.route("/products")
 def show_products():
     connect = get_db()
