@@ -13,18 +13,23 @@ CORS(app, origins="*", supports_credentials=True)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+from mysql.connector import pooling
+
+db_pool = pooling.MySQLConnectionPool(
+    pool_name="pleaseno_pool",
+    pool_size=5,
+    pool_reset_session=True,
+
+    host=os.getenv("DB_HOST"),
+    port=int(os.getenv("DB_PORT")),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    database=os.getenv("DB_NAME"),
+    ssl_ca=os.path.join(os.path.dirname(__file__), "ca.pem")
+)
 
 def get_db():
-    return mysql.connector.connect(
-        host=os.getenv("DB_HOST"),
-        port=int(os.getenv("DB_PORT")),
-        user=os.getenv("DB_USER"),
-        password=os.getenv("DB_PASSWORD"),
-        database=os.getenv("DB_NAME"),
-        ssl_ca=os.path.join(BASE_DIR, "ca.pem")
-    )
-
-
+    return db_pool.get_connection()
 # =========================
 # INDEX
 # =========================
