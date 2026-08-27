@@ -1,0 +1,98 @@
+import re
+from flask import Flask, request, jsonify, session
+import bcrypt
+from flask_cors import CORS
+import mysql.connector
+
+app = Flask(__name__)
+CORS(app, origins=["http://localhost"], supports_credentials=True)
+
+def create_slug(name):
+    slug = name.lower()
+    slug = re.sub(r'[^a-z0-9ąćęłńóśźż ]', '', slug)
+    slug = slug.replace(' ', '-')
+    return slug
+
+def get_db():
+    return mysql.connector.connect(
+        host = "localhost",
+        user = "root",
+        password = "",
+        database = "pleasenoinfo"
+    )
+
+@app.route("/products")
+def show_products():
+    connect = get_db()
+    cursor = connect.cursor()
+
+    cursor.execute("""
+        SELECT
+            products.id,
+            products.website_name,
+            product_colors.color,
+            product_images.imagefront,
+            product_images.imageback
+        FROM products
+        JOIN product_colors
+            ON product_colors.product_id = products.id
+        JOIN product_images
+            ON product_images.product_id = products.id
+            AND product_images.color_id = product_colors.id
+    """)
+
+    result = cursor.fetchall()
+
+    cursor.close()
+    connect.close()
+
+    return jsonify([
+        {
+            "id": row[0],
+            "website_name": row[1],
+            "color": row[2],
+            "imagefront": row[3],
+            "imageback": row[4]
+        }
+        for row in result
+    ])  
+
+@app.route("/products/<website_name>")
+def get_product(website_name):
+    connect = get_db()
+    cursor = connect.cursor(dictionary=True)
+
+    cursor.execute("""
+        SELECT
+            products.id,
+            products.name,
+            products.website_name,
+            products.description,
+            products.sizeGuideLink,
+            products.sizes,
+            product_colors.id AS color_id,
+            product_colors.color,
+            product_images.imagefront,
+            product_images.imageback
+        FROM products
+        JOIN product_colors
+            ON product_colors.product_id = products.id
+        JOIN product_images
+            ON product_images.product_id = products.id
+            AND product_images.color_id = product_colors.id
+        WHERE products.website_name = %s
+    """, (website_name,))
+
+    products = cursor.fetchall()
+
+    cursor.close()
+    connect.close()
+
+    if not products:
+        return jsonify({"error": "Product not found"}), 404
+
+    return jsonify(products)
+
+
+if __name__ == "__main__":
+    app.run()

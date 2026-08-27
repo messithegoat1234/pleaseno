@@ -1,0 +1,165 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   STRONA PRODUKTU
+========================= */
+
+.product-page {
+    width: 100%;
+    max-width: 1300px;
+    display: flex;
+    gap: 80px;
+    margin: 0 auto;
+}
+
+.product-images {
+    width: 50%;
+}
+
+.product-images img {
+    width: 100%;
+    display: block;
+}
+
+.product-info {
+    width: 50%;
+    margin-top: 150px;
+}
+
+.product-info h1 {
+    font-size: 50px;
+}
+
+.product-info p {
+    font-size: 25px;
+}
+
+
+/* =========================
+   KOLORY I ROZMIARY
+========================= */
+
+.colors,
+.sizes {
+    display: flex;
+}
+
+.colors p,
+.sizes p {
+    margin: 20px;
+}
+
+.colors p {
+    cursor: pointer;
+}
+
+.sizes p:first-child {
+    margin-left: 0;
+}
+
+.selected {
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+
+/* =========================
+   NAV
+========================= */
+
+#nav {
+    width: 100%;
+    height: fit-content;
+    margin-top: 30px;
+}
+
+#nav img {
+    height: 100px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* =========================
+   TABLET / MAŁY LAPTOP
+   769px - 1100px
+========================= */
+
+@media (max-width: 1100px) and (min-width: 769px) {
+
+    .product-page {
+        padding: 0 30px;
+        gap: 40px;
+    }
+
+    .product-info {
+        margin-top: 80px;
+    }
+
+    .product-info h1 {
+        font-size: 45px;
+    }
+
+    .product-info p {
+        font-size: 25px;
+    }
+
+    .colors p,
+    .sizes p {
+        margin: 10px;
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .product-page {
+        width: 100%;
+        display: block;
+        padding: 0;
+    }
+
+    .product-images {
+        width: 100%;
+    }
+
+    .product-images img {
+        width: 100%;
+        display: block;
+    }
+
+    .product-info {
+        width: 100%;
+        margin: 30px 0 0 0;
+        padding: 20px;
+    }
+
+    .product-info h1 {
+        font-size: 32px;
+    }
+
+    .product-info p {
+        font-size: 18px;
+    }
+
+    .colors p,
+    .sizes p {
+        margin: 10px;
+    }
+
+    .sizes p:first-child {
+        margin-left: 0;
+    }
+
+    #nav img {
+        height: 70px;
+        max-width: 90%;
+    }
+
+}
