@@ -39,8 +39,8 @@ async function showProducts() {
             colorsHTML += `
                 <span 
                     class="color-dot"
-                    data-front="files/${color.imagefront}"
-                    data-back="files/${color.imageback}"
+                    data-front="files_webp/${color.imagefront.replace(/\.[^/.]+$/, ".webp")}"
+                    data-back="files_webp/${color.imageback.replace(/\.[^/.]+$/, ".webp")}"
                     style="background-color: ${colorName.toLowerCase()}">
                 </span>
             `;
@@ -54,11 +54,11 @@ async function showProducts() {
 
                     <a href="https://pleaseno.onrender.com/${product.website_name}">
                         <img 
-                            src="files/${product.imagefront}"
+                            src="files_webp/${product.imagefront.replace(/\.[^/.]+$/, ".webp")}"
                             loading="lazy"
                             decoding="async"
-                            data-front="files/${product.imagefront}"
-                            data-back="files/${product.imageback}"
+                            data-front="files_webp/${product.imagefront.replace(/\.[^/.]+$/, ".webp")}"
+                            data-back="files_webp/${product.imageback.replace(/\.[^/.]+$/, ".webp")}"
                         >
                     </a>
 
