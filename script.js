@@ -52,7 +52,7 @@ async function showProducts() {
 
                 <div class="product-image">
 
-                    <a href="/pleasenoinfo/${product.website_name}">
+                    <a href="https://pleaseno.onrender.com/${product.website_name}">
                         <img 
                             src="files/${product.imagefront}"
                             data-front="files/${product.imagefront}"
