@@ -55,6 +55,8 @@ async function showProducts() {
                     <a href="https://pleaseno.onrender.com/${product.website_name}">
                         <img 
                             src="files/${product.imagefront}"
+                            loading="lazy"
+                            decoding="async"
                             data-front="files/${product.imagefront}"
                             data-back="files/${product.imageback}"
                         >
