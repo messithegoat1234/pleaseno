@@ -17,12 +17,12 @@ import os
 
 def get_db():
     return mysql.connector.connect(
-        host="mysql-2a46d1fc-pleaseno.l.aivencloud.com",
-        port=27565,
-        user="avnadmin",
-        password="",
-        database="pleasenoinfo",
-        ssl_ca="ca.pem"
+        host=os.getenv("DB_HOST"),
+        port=int(os.getenv("DB_PORT")),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        database=os.getenv("DB_NAME"),
+        ssl_ca=os.getenv("DB_SSL_CA")
     )
 
 @app.route("/products")
