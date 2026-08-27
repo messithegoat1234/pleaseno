@@ -33,9 +33,7 @@ def home():
 def serve_file(filename):
     return send_from_directory(".", filename)
 
-@app.route("/<website_name>")
-def product_page(website_name):
-    return send_from_directory(".", "product.html")
+
 import time
 
 @app.route("/products")
