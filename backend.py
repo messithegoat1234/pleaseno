@@ -50,7 +50,7 @@ def home():
 # PRODUCT PAGE
 # =========================
 
-@app.route("/<website_name>")
+@app.route("/<website_name>/")
 def product_page(website_name):
     return send_from_directory(".", "product.html")
 
