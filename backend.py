@@ -15,6 +15,21 @@ def create_slug(name):
 
 import os
 
+CA_CERT = "/tmp/ca.pem"
+
+if os.getenv("DB_SSL_CA"):
+    with open(CA_CERT, "w") as f:
+        f.write(os.getenv("DB_SSL_CA"))
+
+def get_db():
+    return mysql.connector.connect(
+        host=os.getenv("DB_HOST"),
+        port=int(os.getenv("DB_PORT")),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        database=os.getenv("DB_NAME"),
+        ssl_ca=CA_CERT
+    )
 def get_db():
     return mysql.connector.connect(
         host=os.getenv("DB_HOST"),
