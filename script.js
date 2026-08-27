@@ -1,6 +1,6 @@
 async function showProducts() {
 
-    let res = await fetch("/products");
+    let res = await fetch("https://pleaseno.onrender.com/products");
     let data = await res.json();
 
     let container = document.querySelector("#products");
