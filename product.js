@@ -19,8 +19,8 @@ async function showProduct() {
         <div class="product-page">
 
             <div class="product-images">
-                <img id="front" src="files/${product.imagefront}">
-                <img id="back" src="files/${product.imageback}">
+                <img id="front" src="files_webp/${product.imagefront.replace(/\.[^/.]+$/, ".webp")}">
+                <img id="back" src="files_webp/${product.imageback.replace(/\.[^/.]+$/, ".webp")}">
             </div>
 
             <div class="product-info">
@@ -64,10 +64,10 @@ async function showProduct() {
             if (!selectedProduct) return;
 
             document.querySelector("#front").src =
-                `files/${selectedProduct.imagefront}`;
+                `files_webp/${selectedProduct.imagefront.replace(/\.[^/.]+$/, ".webp")}`;
 
             document.querySelector("#back").src =
-                `files/${selectedProduct.imageback}`;
+                `files_webp/${selectedProduct.imageback.replace(/\.[^/.]+$/, ".webp")}`;
 
 
             document.querySelectorAll(".colors p").forEach(element => {
