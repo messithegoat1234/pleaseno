@@ -1,11 +1,23 @@
+import os
 import re
-from flask import Flask, request, jsonify, session, send_from_directory
-import bcrypt
+import time
+
+from flask import Flask, jsonify, send_from_directory
 from flask_cors import CORS
 import mysql.connector
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost"], supports_credentials=True)
+
+CORS(
+    app,
+    origins=[
+        "http://localhost",
+        "http://127.0.0.1:5500",
+        "https://pleaseno.onrender.com"
+    ],
+    supports_credentials=True
+)
+
 
 def create_slug(name):
     slug = name.lower()
@@ -13,7 +25,6 @@ def create_slug(name):
     slug = slug.replace(' ', '-')
     return slug
 
-import os
 
 def get_db():
     return mysql.connector.connect(
@@ -25,27 +36,48 @@ def get_db():
         ssl_ca=os.path.join(os.path.dirname(__file__), "ca.pem")
     )
 
+
+# =========================
+# STRONA GŁÓWNA
+# =========================
+
 @app.route("/")
 def home():
     return send_from_directory(".", "index.html")
 
 
-@app.route("/files_webp/<path:filename>")
-def files_webp(filename):
-    return send_from_directory("files_webp", filename)
-
+# =========================
+# PRODUCT PAGE
+# =========================
 
 @app.route("/<website_name>")
 def product_page(website_name):
     return send_from_directory(".", "product.html")
 
-import time
+
+# =========================
+# PLIKI WEBP
+# =========================
+
+@app.route("/files_webp/<path:filename>")
+def files_webp(filename):
+    return send_from_directory(
+        os.path.join(os.path.dirname(__file__), "files_webp"),
+        filename
+    )
+
+
+# =========================
+# LISTA PRODUKTÓW
+# =========================
 
 @app.route("/products")
 def show_products():
+
     start = time.time()
 
     connect = get_db()
+
     print("DB CONNECT:", time.time() - start)
 
     cursor = connect.cursor()
@@ -58,8 +90,10 @@ def show_products():
             product_images.imagefront,
             product_images.imageback
         FROM products
+
         JOIN product_colors
             ON product_colors.product_id = products.id
+
         JOIN product_images
             ON product_images.product_id = products.id
             AND product_images.color_id = product_colors.id
@@ -85,9 +119,16 @@ def show_products():
         for row in result
     ])
 
+
+# =========================
+# KONKRETNY PRODUKT - API
+# =========================
+
 @app.route("/products/<website_name>")
 def get_product(website_name):
+
     connect = get_db()
+
     cursor = connect.cursor(dictionary=True)
 
     cursor.execute("""
@@ -98,16 +139,22 @@ def get_product(website_name):
             products.description,
             products.sizeGuideLink,
             products.sizes,
+
             product_colors.id AS color_id,
             product_colors.color,
+
             product_images.imagefront,
             product_images.imageback
+
         FROM products
+
         JOIN product_colors
             ON product_colors.product_id = products.id
+
         JOIN product_images
             ON product_images.product_id = products.id
             AND product_images.color_id = product_colors.id
+
         WHERE products.website_name = %s
     """, (website_name,))
 
@@ -117,10 +164,20 @@ def get_product(website_name):
     connect.close()
 
     if not products:
-        return jsonify({"error": "Product not found"}), 404
+        return jsonify({
+            "error": "Product not found"
+        }), 404
 
     return jsonify(products)
 
 
+# =========================
+# START
+# =========================
+
 if __name__ == "__main__":
-    app.run()
+    app.run(
+        host="127.0.0.1",
+        port=5000,
+        debug=True
+    )
