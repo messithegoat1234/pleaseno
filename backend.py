@@ -29,10 +29,15 @@ def get_db():
 def home():
     return send_from_directory(".", "index.html")
 
-@app.route("/<path:filename>")
-def serve_file(filename):
-    return send_from_directory(".", filename)
 
+@app.route("/files_webp/<path:filename>")
+def files_webp(filename):
+    return send_from_directory("files_webp", filename)
+
+
+@app.route("/<website_name>")
+def product_page(website_name):
+    return send_from_directory(".", "product.html")
 
 import time
 
