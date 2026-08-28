@@ -30,6 +30,16 @@ db_pool = pooling.MySQLConnectionPool(
 
 def get_db():
     return db_pool.get_connection()
+
+@app.route("/health/db")
+def health_db():
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT 1")
+    cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return "OK"
 # =========================
 # INDEX
 # =========================
