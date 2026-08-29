@@ -13,11 +13,12 @@ async function showProduct() {
 
     let container = document.querySelector("#product");
 
-    let choice = data[0].color;
-
     if(data[0].color == "DARKGREEN"){
         data[0].color = "CAMO"
     }
+
+    let choice = data[0].color;
+    
     container.innerHTML = `
         <div class="product-page">
 
