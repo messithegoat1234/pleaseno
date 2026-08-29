@@ -15,6 +15,9 @@ async function showProduct() {
 
     let choice = data[0].color;
 
+    if(data[0].color == "DARKGREEN"){
+        data[0].color = "CAMO"
+    }
     container.innerHTML = `
         <div class="product-page">
 
