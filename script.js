@@ -36,7 +36,7 @@ async function showProducts() {
                 colorName = "rgb(0, 48, 104)";
             }
 
-            if (product.id == 19 || product.id == 20) {
+            if (product.id == 19 || product.id == 20 && colorName == "BLUE") {
                 colorName = "lightblue";
             }
 
