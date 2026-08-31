@@ -28,7 +28,7 @@ async function showProducts() {
 
             let colorName = color.color;
 
-            if (colorName == "GRAY") {
+            if (colorName == "GRAY" || colorName == "GREY") {
                 colorName = "lightgrey";
             }
 
