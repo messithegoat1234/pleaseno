@@ -31,6 +31,166 @@ db_pool = pooling.MySQLConnectionPool(
 def get_db():
     return db_pool.get_connection()
 
+
+def save_visit(page):
+    try:
+        connect = get_db()
+        cursor = connect.cursor()
+
+        # IP użytkownika
+        ip = request.headers.get("X-Forwarded-For", request.remote_addr)
+
+        # Jeżeli jest kilka IP, bierzemy pierwsze
+        if ip and "," in ip:
+            ip = ip.split(",")[0].strip()
+
+        # User-Agent
+        user_agent = request.headers.get("User-Agent", "")
+
+        # Referer
+        referer = request.headers.get("Referer", "")
+
+        # =========================
+        # SYSTEM
+        # =========================
+
+        if "iPhone" in user_agent:
+            device = "iPhone"
+        elif "iPad" in user_agent:
+            device = "iPad"
+        elif "Android" in user_agent:
+            device = "Android"
+        elif "Windows" in user_agent:
+            device = "Windows PC"
+        elif "Macintosh" in user_agent:
+            device = "Mac"
+        elif "Linux" in user_agent:
+            device = "Linux"
+        else:
+            device = "Unknown"
+
+        # =========================
+        # OS
+        # =========================
+
+        if "iPhone OS" in user_agent:
+            match = re.search(r"iPhone OS ([0-9_]+)", user_agent)
+
+            if match:
+                os_name = "iOS " + match.group(1).replace("_", ".")
+            else:
+                os_name = "iOS"
+
+        elif "iPad" in user_agent:
+            os_name = "iPadOS"
+
+        elif "Android" in user_agent:
+            match = re.search(r"Android ([0-9.]+)", user_agent)
+
+            if match:
+                os_name = "Android " + match.group(1)
+            else:
+                os_name = "Android"
+
+        elif "Windows NT" in user_agent:
+            os_name = "Windows"
+
+        elif "Mac OS X" in user_agent:
+            os_name = "macOS"
+
+        elif "Linux" in user_agent:
+            os_name = "Linux"
+
+        else:
+            os_name = "Unknown"
+
+        # =========================
+        # BROWSER
+        # =========================
+
+        if "Instagram" in user_agent:
+            browser = "Instagram"
+
+        elif "Edg/" in user_agent:
+            browser = "Microsoft Edge"
+
+        elif "OPR/" in user_agent:
+            browser = "Opera"
+
+        elif "Chrome/" in user_agent:
+            browser = "Chrome"
+
+        elif "Firefox/" in user_agent:
+            browser = "Firefox"
+
+        elif "Safari/" in user_agent:
+            browser = "Safari"
+
+        else:
+            browser = "Unknown"
+
+        # =========================
+        # UTM
+        # =========================
+
+        utm_source = request.args.get("utm_source")
+        utm_medium = request.args.get("utm_medium")
+        utm_campaign = request.args.get("utm_campaign")
+        utm_content = request.args.get("utm_content")
+
+        # =========================
+        # INSERT
+        # =========================
+
+        cursor.execute("""
+            INSERT INTO visits (
+                ip,
+                device,
+                browser,
+                os,
+                referer,
+                utm_source,
+                utm_medium,
+                utm_campaign,
+                utm_content,
+                page
+            )
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (
+            ip,
+            device,
+            browser,
+            os_name,
+            referer,
+            utm_source,
+            utm_medium,
+            utm_campaign,
+            utm_content,
+            page
+        ))
+
+        connect.commit()
+
+        cursor.close()
+        connect.close()
+
+        print(
+            "VISIT:",
+            ip,
+            device,
+            browser,
+            os_name,
+            referer,
+            utm_source,
+            page
+        )
+
+    except Exception as e:
+        print("ANALYTICS ERROR:", e)
+
+
+
+
 @app.route("/health/db")
 def health_db():
     conn = get_db()
