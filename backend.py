@@ -175,33 +175,23 @@ def health_db():
     cursor.close()
     conn.close()
     return "OK"
-# =========================
-# INDEX
-# =========================
+    
 
 @app.route("/")
 def home():
     return send_from_directory(BASE_DIR, "index.html")
 
 
-# =========================
-# PRODUCT PAGE
-# =========================
-
 @app.route("/<website_name>")
 def product_page(website_name):
 
-    # Nie pozwalamy, żeby np. /style.css zostało potraktowane
-    # jako nazwa produktu
     if "." in website_name:
         return send_from_directory(BASE_DIR, website_name)
 
+    save_visit("/" + website_name)
+
     return send_from_directory(BASE_DIR, "product.html")
 
-
-# =========================
-# WEBP
-# =========================
 
 @app.route("/files_webp/<path:filename>")
 def files_webp(filename):
@@ -210,10 +200,6 @@ def files_webp(filename):
         filename
     )
 
-
-# =========================
-# PRODUCTS API
-# =========================
 
 @app.route("/products")
 def show_products():
@@ -259,10 +245,6 @@ def show_products():
         for row in result
     ])
 
-
-# =========================
-# SINGLE PRODUCT API
-# =========================
 
 @app.route("/products/<website_name>")
 def get_product(website_name):
