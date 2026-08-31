@@ -37,22 +37,13 @@ def save_visit(page):
         connect = get_db()
         cursor = connect.cursor()
 
-        # IP użytkownika
         ip = request.headers.get("X-Forwarded-For", request.remote_addr)
 
-        # Jeżeli jest kilka IP, bierzemy pierwsze
         if ip and "," in ip:
             ip = ip.split(",")[0].strip()
 
-        # User-Agent
         user_agent = request.headers.get("User-Agent", "")
-
-        # Referer
         referer = request.headers.get("Referer", "")
-
-        # =========================
-        # SYSTEM
-        # =========================
 
         if "iPhone" in user_agent:
             device = "iPhone"
@@ -68,10 +59,6 @@ def save_visit(page):
             device = "Linux"
         else:
             device = "Unknown"
-
-        # =========================
-        # OS
-        # =========================
 
         if "iPhone OS" in user_agent:
             match = re.search(r"iPhone OS ([0-9_]+)", user_agent)
@@ -104,10 +91,6 @@ def save_visit(page):
         else:
             os_name = "Unknown"
 
-        # =========================
-        # BROWSER
-        # =========================
-
         if "Instagram" in user_agent:
             browser = "Instagram"
 
@@ -129,19 +112,11 @@ def save_visit(page):
         else:
             browser = "Unknown"
 
-        # =========================
-        # UTM
-        # =========================
-
         utm_source = request.args.get("utm_source")
         utm_medium = request.args.get("utm_medium")
         utm_campaign = request.args.get("utm_campaign")
         utm_content = request.args.get("utm_content")
-
-        # =========================
-        # INSERT
-        # =========================
-
+        
         cursor.execute("""
             INSERT INTO visits (
                 ip,
