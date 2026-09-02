@@ -55,8 +55,6 @@ def product_page(website_name):
     if "." in website_name:
         return send_from_directory(BASE_DIR, website_name)
 
-    save_visit("/" + website_name)
-
     return send_from_directory(BASE_DIR, "product.html")
 
 
