@@ -1,3 +1,4 @@
+```js
 async function showProduct() {
 
     const parts = window.location.pathname.split("/");
@@ -9,68 +10,109 @@ async function showProduct() {
 
     let data = await res.json();
 
+    if (!data || data.length === 0) {
+        return;
+    }
+
+    data.forEach(product => {
+        if (product.color === "DARKGREEN") {
+            product.color = "CAMO";
+        }
+    });
+
     let product = data[0];
 
     let container = document.querySelector("#product");
 
-    if(data[0].color == "DARKGREEN"){
-        data[0].color = "CAMO"
+    let choice = product.color;
+
+
+    if (
+        product.website_name === "dachshund-flag-tee" &&
+        choice === "CAMO"
+    ) {
+        product.description = "UNISEX\n240GSM\n100% BAWEŁNA\nOVERSIZED";
+        product.sizes = "S M L XL 2XL";
     }
 
-    let choice = data[0].color;
-
-    if(data[0].website_name == 'dachshund-flag-tee' && choice == "CAMO"){
-        data[0].description = "UNISEX\n240GSM\n100% BAWEŁNA\nOVERSIZED"
-        data[0].sizes = "S M L XL 2XL"
+    if (
+        product.website_name === "dachshund-flag-longsleeve" &&
+        choice === "PINK"
+    ) {
+        product.description =
+            "UNISEX\n230GSM\n100% BAWEŁNA\nOVERSIZED\nWASHED";
     }
 
-    if(data[0].website_name == 'dachshund-flag-longsleeve' && choice == "PINK"){
-        data[0].description = "UNISEX\n230GSM\n100% BAWEŁNA\nOVERSIZED\nWASHED"
-        
-    }
     container.innerHTML = `
         <div class="product-page">
 
             <div class="product-images">
-                <img id="front" src="files_webp/${product.imagefront.replace(/\.[^/.]+$/, ".webp")}">
-                <img id="back" src="files_webp/${product.imageback.replace(/\.[^/.]+$/, ".webp")}">
+
+                <img 
+                    id="front" 
+                    src="files_webp/${product.imagefront.replace(/\.[^/.]+$/, ".webp")}"
+                >
+
+                <img 
+                    id="back" 
+                    src="files_webp/${product.imageback.replace(/\.[^/.]+$/, ".webp")}"
+                >
+
             </div>
+
 
             <div class="product-info">
 
                 <h1>${product.name}</h1>
 
-                <p>${product.description.replace(/\n/g, "<br>")}</p>
 
-                <div class='price'>
-                    ${product.price} PLN 
+                <p id="description">
+                    ${product.description.replace(/\n/g, "<br>")}
+                </p>
+
+
+                <div class="price">
+                    ${product.price} PLN
                 </div>
-                
+
+
                 <div class="colors">
+
                     ${data.map(color => `
-                        <p 
-                            class="${color.color.toLowerCase()} 
-                            ${color.color === choice ? "selected" : ""}"
-                            data-color="${color.color}">
+                        <p
+                            class="${color.color.toLowerCase()} ${
+                                color.color === choice ? "selected" : ""
+                            }"
+                            data-color="${color.color}"
+                        >
                             ${color.color}
                         </p>
                     `).join("")}
+
                 </div>
 
-                <div class="sizes">
+
+                <div class="sizes" id="sizes">
+
                     ${product.sizes.split(" ").map(size => `
                         <p>${size}</p>
                     `).join("")}
-                </div>  
 
-                <div class='order'>
-                    ORDER VIA INSTAGRAM <br><span class='igName'>@PLEASENOWORLD</span> OR <span class='igName'>@LEONOSZAJCA</span>
                 </div>
-                
+
+
+                <div class="order">
+                    ORDER VIA INSTAGRAM <br>
+                    <span class="igName">@PLEASENOWORLD</span>
+                    OR
+                    <span class="igName">@LEONOSZAJCA</span>
+                </div>
+
             </div>
 
         </div>
     `;
+
 
     document.querySelectorAll(".colors p").forEach(colorElement => {
 
@@ -82,13 +124,57 @@ async function showProduct() {
                 product => product.color === choice
             );
 
-            if (!selectedProduct) return;
+
+            if (!selectedProduct) {
+                return;
+            }
+
+
+            let description = selectedProduct.description;
+            let sizes = selectedProduct.sizes;
+
+
+            if (
+                selectedProduct.website_name === "dachshund-flag-tee" &&
+                choice === "CAMO"
+            ) {
+                description =
+                    "UNISEX\n240GSM\n100% BAWEŁNA\nOVERSIZED";
+
+                sizes = "S M L XL 2XL";
+            }
+
+
+            if (
+                selectedProduct.website_name === "dachshund-flag-longsleeve" &&
+                choice === "PINK"
+            ) {
+                description =
+                    "UNISEX\n230GSM\n100% BAWEŁNA\nOVERSIZED\nWASHED";
+            }
+
 
             document.querySelector("#front").src =
-                `files_webp/${selectedProduct.imagefront.replace(/\.[^/.]+$/, ".webp")}`;
+                `files_webp/${selectedProduct.imagefront.replace(
+                    /\.[^/.]+$/,
+                    ".webp"
+                )}`;
+
 
             document.querySelector("#back").src =
-                `files_webp/${selectedProduct.imageback.replace(/\.[^/.]+$/, ".webp")}`;
+                `files_webp/${selectedProduct.imageback.replace(
+                    /\.[^/.]+$/,
+                    ".webp"
+                )}`;
+
+
+            document.querySelector("#description").innerHTML =
+                description.replace(/\n/g, "<br>");
+
+            document.querySelector("#sizes").innerHTML =
+                sizes.split(" ").map(size => `
+                    <p>${size}</p>
+                `).join("");
 
 
             document.querySelectorAll(".colors p").forEach(element => {
@@ -96,13 +182,18 @@ async function showProduct() {
             });
 
             this.classList.add("selected");
+
         });
 
     });
-    
-    let title = document.querySelector("title")
 
-    title.innerHTML = product.name
+
+    let title = document.querySelector("title");
+
+    title.innerHTML = product.name;
+
 }
 
+
 showProduct();
+```
