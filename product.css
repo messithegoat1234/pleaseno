@@ -3,11 +3,6 @@
     box-sizing: border-box;
 }
 
-
-/* =========================
-   STRONA PRODUKTU
-========================= */
-
 .product-page {
     width: 100%;
     max-width: 1300px;
@@ -39,9 +34,6 @@
 }
 
 
-/* =========================
-   KOLORY I ROZMIARY
-========================= */
 
 .colors,
 .sizes {
@@ -67,10 +59,6 @@
 }
 
 
-/* =========================
-   NAV
-========================= */
-
 #nav {
     width: 100%;
     height: fit-content;
@@ -85,10 +73,6 @@
 }
 
 
-/* =========================
-   TABLET / MAŁY LAPTOP
-   769px - 1100px
-========================= */
 
 @media (max-width: 1100px) and (min-width: 769px) {
 
@@ -162,4 +146,13 @@
         max-width: 90%;
     }
 
+}
+
+.price{
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.igName{
+    text-decoration: underline 1px black
 }
