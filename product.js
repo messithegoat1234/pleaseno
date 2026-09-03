@@ -21,10 +21,12 @@ async function showProduct() {
 
     if(data[0].website_name == 'dachshund-flag-tee' && choice == "CAMO"){
         data[0].description = "UNISEX\n240GSM\n100% BAWEŁNA\nOVERSIZED"
+        data[0].sizes = "S M L XL 2XL"
     }
 
     if(data[0].website_name == 'dachshund-flag-longsleeve' && choice == "PINK"){
         data[0].description = "UNISEX\n230GSM\n100% BAWEŁNA\nOVERSIZED\nWASHED"
+        
     }
     container.innerHTML = `
         <div class="product-page">
