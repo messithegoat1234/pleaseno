@@ -1,4 +1,3 @@
-```js
 async function showProduct() {
 
     const parts = window.location.pathname.split("/");
@@ -196,4 +195,3 @@ async function showProduct() {
 
 
 showProduct();
-```
