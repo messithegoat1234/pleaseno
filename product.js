@@ -50,6 +50,14 @@ async function showProduct() {
                     `).join("")}
                 </div>
 
+                <div class='price'>
+                    ${product.price}
+                </div>
+
+                <div class='order'>
+                    ORDER VIA IG <span class='igName'>@PLEASENOWORLD</span> OR <span class='igName'>@LEONOSZAJCA</span>
+                </div>
+                
             </div>
 
         </div>
