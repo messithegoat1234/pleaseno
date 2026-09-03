@@ -42,15 +42,11 @@
 
 .colors p,
 .sizes p {
-    margin: 20px;
+    margin: 20px 0px 20px 0px;
 }
 
 .colors p {
     cursor: pointer;
-}
-
-.sizes p:first-child {
-    margin-left: 0;
 }
 
 .selected {
@@ -73,6 +69,20 @@
 }
 
 
+.price{
+    font-weight: bold;
+    font-size: 25px;
+    margin: 20px 0px 20px 0px;
+}
+
+.order{
+    margin: 20px 0px 20px 0px;
+    font-size: 25px;
+}
+
+.igName{
+    text-decoration: underline 1px black
+}
 
 @media (max-width: 1100px) and (min-width: 769px) {
 
@@ -95,7 +105,7 @@
 
     .colors p,
     .sizes p {
-        margin: 10px;
+        margin: 10px 0px 10px 0px;
     }
 
 }
@@ -148,17 +158,4 @@
 
 }
 
-.price{
-    font-weight: bold;
-    font-size: 25px;
-    margin: 20px;
-}
 
-.order{
-    margin: 20px;
-    font-size: 25px;
-}
-
-.igName{
-    text-decoration: underline 1px black
-}
