@@ -152,7 +152,11 @@
     font-weight: bold;
     font-size: 25px;
     margin: 20px;
-    
+}
+
+.order{
+    margin: 20px;
+    font-size: 25px;
 }
 
 .igName{
