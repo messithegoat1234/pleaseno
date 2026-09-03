@@ -72,8 +72,8 @@ async function showProducts() {
                     ${colorsHTML}
                 </div>
 
-                <div class='name'>
-                    <p class='productName'>${product.name}</p>
+                <div class='description'>
+                    <p class='name'>${product.name}</p>
                     <p class='price'>${product.price} PLN</p>
                 </div>
 
