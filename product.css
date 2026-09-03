@@ -156,7 +156,7 @@
 
     .colors p,
     .sizes p {
-        margin: 10px;
+        margin: 10px 0px 10px 0px;
     }
 
 
@@ -167,7 +167,7 @@
 
     .price{
         font-weight: bold;
-        font-size: 18px;
+        font-size: 23px;
         margin: 20px 0px 10px 0px;
     }
 
