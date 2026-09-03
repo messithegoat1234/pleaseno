@@ -132,7 +132,8 @@ def get_product(website_name):
             product_colors.id AS color_id,
             product_colors.color,
             product_images.imagefront,
-            product_images.imageback
+            product_images.imageback,
+            products.price
         FROM products
         JOIN product_colors
             ON product_colors.product_id = products.id
