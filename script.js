@@ -71,11 +71,12 @@ async function showProducts() {
                 <div class="colors">
                     ${colorsHTML}
                 </div>
-
-                <div class='description'>
-                    <p class='name'>${product.name}</p>
-                    <p class='price'>${product.price} PLN</p>
-                </div>
+                <a href="https://pleaseno.onrender.com/${product.website_name}">
+                    <div class='description'>
+                        <p class='name'>${product.name}</p>
+                        <p class='price'>${product.price} PLN</p>
+                    </div>
+                </a>
 
             </div>
         `;
