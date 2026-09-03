@@ -80,6 +80,7 @@ def show_products():
     cursor.execute("""
         SELECT
             products.id,
+            products.name,
             products.website_name,
             product_colors.color,
             product_images.imagefront,
@@ -102,10 +103,11 @@ def show_products():
     return jsonify([
         {
             "id": row[0],
-            "website_name": row[1],
-            "color": row[2],
-            "imagefront": row[3],
-            "imageback": row[4]
+            "name": row[1],
+            "website_name": row[2],
+            "color": row[3],
+            "imagefront": row[4],
+            "imageback": row[5]
         }
         for row in result
     ])
