@@ -20,7 +20,7 @@ async function showProduct() {
     let choice = data[0].color;
 
     if(data[0].website_name == 'dachshund-flag-tee' && choice == "CAMO"){
-        data[0].description = "UNISEX\n230GSM\n100% BAWEŁNA\nOVERSIZED"
+        data[0].description = "UNISEX\n240GSM\n100% BAWEŁNA\nOVERSIZED"
     }
 
     if(data[0].website_name == 'dachshund-flag-longsleeve' && choice == "PINK"){
