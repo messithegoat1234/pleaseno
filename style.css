@@ -1,7 +1,7 @@
 #products {
     width: 100%;
-    max-width: 1300px;
-    margin: 70px auto 100px;
+    max-width: 1400px;
+    margin: 70px auto 50px;
     display: flex;
     flex-wrap: wrap;
 }
@@ -9,7 +9,7 @@
 .product {
     width: 25%;
     box-sizing: border-box;
-    padding: 10px;
+    padding: 15px;
 }
 
 .product img {
@@ -72,5 +72,12 @@
         width: 33.3%;
         margin: -40px 0px 30px 0px
     }
+}
+
+.description{
+    font-weight: bold;
+    text-align: center;
+    font-size: 17px;
+    margin-top: 30px;
 }
 
