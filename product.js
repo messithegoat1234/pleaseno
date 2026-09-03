@@ -34,7 +34,7 @@ async function showProduct() {
                 <p>${product.description.replace(/\n/g, "<br>")}</p>
 
                 <div class='price'>
-                    ${product.price} PLN
+                    ${product.price} PLN 
                 </div>
                 
                 <div class="colors">
