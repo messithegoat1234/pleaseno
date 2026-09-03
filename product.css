@@ -71,7 +71,7 @@
 
 .price{
     font-weight: bold;
-    font-size: 25px;
+    font-size: 30px;
     margin: 40px 0px 20px 0px;
 }
 
@@ -159,9 +159,6 @@
         margin: 10px;
     }
 
-    .sizes p:first-child {
-        margin-left: 0;
-    }
 
     #nav img {
         height: 70px;
