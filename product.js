@@ -30,7 +30,7 @@ async function showProduct() {
         product.website_name === "dachshund-flag-tee" &&
         choice === "CAMO"
     ) {
-        product.description = "UNISEX\n240GSM\n100% BAWEŁNA\nOVERSIZED";
+        product.description = "UNISEX\n240GSM\n100% COTTON\nOVERSIZED";
         product.sizes = "S M L XL 2XL";
     }
 
@@ -39,7 +39,7 @@ async function showProduct() {
         choice === "PINK"
     ) {
         product.description =
-            "UNISEX\n230GSM\n100% BAWEŁNA\nOVERSIZED\nWASHED";
+            "UNISEX\n230GSM\n100% COTTON\nOVERSIZED\nWASHED";
     }
 
     container.innerHTML = `
@@ -138,7 +138,7 @@ async function showProduct() {
                 choice === "CAMO"
             ) {
                 description =
-                    "UNISEX\n240GSM\n100% BAWEŁNA\nOVERSIZED";
+                    "UNISEX\n240GSM\n100% COTTON\nOVERSIZED";
 
                 sizes = "S M L XL 2XL";
             }
@@ -149,7 +149,7 @@ async function showProduct() {
                 choice === "PINK"
             ) {
                 description =
-                    "UNISEX\n230GSM\n100% BAWEŁNA\nOVERSIZED\nWASHED";
+                    "UNISEX\n230GSM\n100% COTTON\nOVERSIZED\nWASHED";
             }
 
 
