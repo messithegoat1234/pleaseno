@@ -73,7 +73,7 @@ async function showProducts() {
                 </div>
 
                 <div class='name'>
-                    <p class='productName'>${product.name}</p><br>
+                    <p class='productName'>${product.name}</p>
                     <p class='price'>${product.price}</p>
                 </div>
 
