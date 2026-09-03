@@ -33,6 +33,10 @@ async function showProduct() {
 
                 <p>${product.description.replace(/\n/g, "<br>")}</p>
 
+                <div class='price'>
+                    ${product.price} PLN
+                </div>
+                
                 <div class="colors">
                     ${data.map(color => `
                         <p 
@@ -48,11 +52,7 @@ async function showProduct() {
                     ${product.sizes.split(" ").map(size => `
                         <p>${size}</p>
                     `).join("")}
-                </div>
-
-                <div class='price'>
-                    ${product.price} PLN
-                </div>
+                </div>  
 
                 <div class='order'>
                     ORDER VIA IG <span class='igName'>@PLEASENOWORLD</span> OR <span class='igName'>@LEONOSZAJCA</span>
