@@ -72,6 +72,11 @@ async function showProducts() {
                     ${colorsHTML}
                 </div>
 
+                <div class='name'>
+                    <p class='productName'>${product.name}</p><br>
+                    <p class='price'>${product.price}</p>
+                </div>
+
             </div>
         `;
     });
