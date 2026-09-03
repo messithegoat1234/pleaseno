@@ -51,7 +51,7 @@ async function showProduct() {
                 </div>
 
                 <div class='price'>
-                    ${product.price}
+                    ${product.price} PLN
                 </div>
 
                 <div class='order'>
