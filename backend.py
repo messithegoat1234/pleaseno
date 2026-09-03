@@ -84,7 +84,8 @@ def show_products():
             products.website_name,
             product_colors.color,
             product_images.imagefront,
-            product_images.imageback
+            product_images.imageback,
+            products.price
         FROM products
         JOIN product_colors
             ON product_colors.product_id = products.id
@@ -107,7 +108,8 @@ def show_products():
             "website_name": row[2],
             "color": row[3],
             "imagefront": row[4],
-            "imageback": row[5]
+            "imageback": row[5],
+            "price": row[6]
         }
         for row in result
     ])
