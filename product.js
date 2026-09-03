@@ -55,7 +55,7 @@ async function showProduct() {
                 </div>  
 
                 <div class='order'>
-                    ORDER VIA IG <span class='igName'>@PLEASENOWORLD</span> OR <span class='igName'>@LEONOSZAJCA</span>
+                    ORDER VIA INSTAGRAM <br><span class='igName'>@PLEASENOWORLD</span> OR <span class='igName'>@LEONOSZAJCA</span>
                 </div>
                 
             </div>
