@@ -87,7 +87,9 @@ a{
 }
 
 .changeWidthPlus, .changeWidthMinus{
-    font-size: 45px
+    font-size: 45px;
+    width: 45px;
+    height: 45px;
 }
 
 #changeWidth{
