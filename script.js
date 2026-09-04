@@ -36,7 +36,7 @@ async function showProducts() {
                 colorName = "rgb(0, 48, 104)";
             }
 
-            if (product.id == 19 && colorName == "BLUE" || product.id == 20 && colorName == "BLUE") {
+            if ((product.id == 19 || product.id == 20) && color.color == "BLUE") {
                 colorName = "lightblue";
             }
 
@@ -45,6 +45,12 @@ async function showProducts() {
                     class="color-dot"
                     data-front="files_webp/${color.imagefront.replace(/\.[^/.]+$/, ".webp")}"
                     data-back="files_webp/${color.imageback.replace(/\.[^/.]+$/, ".webp")}"
+                    data-name="${
+                        product.website_name === "dachshund-flag-longsleeve" &&
+                        color.color === "PINK"
+                            ? "DACHSHUND FLAG WASHED LONGSLEEVE"
+                            : product.name
+                    }"
                     style="background-color: ${colorName.toLowerCase()}">
                 </span>
             `;
@@ -71,6 +77,7 @@ async function showProducts() {
                 <div class="colors">
                     ${colorsHTML}
                 </div>
+
                 <a href="https://pleaseno.onrender.com/${product.website_name}">
                     <div class='description'>
                         <p class='name'>${product.name}</p>
@@ -82,6 +89,7 @@ async function showProducts() {
         `;
     });
 
+
     document.querySelectorAll(".color-dot").forEach(dot => {
 
         dot.addEventListener("click", function() {
@@ -90,10 +98,14 @@ async function showProducts() {
 
             let img = product.querySelector(".product-image img");
 
+            let name = product.querySelector(".name");
+
             img.src = this.dataset.front;
 
             img.dataset.front = this.dataset.front;
             img.dataset.back = this.dataset.back;
+
+            name.textContent = this.dataset.name;
 
         });
 
