@@ -171,7 +171,11 @@ async function showProducts() {
        	 	document.querySelector(".changeWidthPlus").style.display = "block";
     	}
 
-	});                                                          
+	});
+
+	if (productWidth == 50) {
+        document.querySelector("#products").style.margin = "-70px auto 50px";
+    } 
                                                                 
 }
 
