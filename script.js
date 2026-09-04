@@ -124,44 +124,54 @@ async function showProducts() {
 
     });
     
-    document.querySelector(".changeWidthPlus").addEventListener("click", function(){
-        document.querySelectorAll(".product").forEach(product => {
+    let productWidth = 25;
 
-            if (product.offsetWidth == 25%) {
-                product.style.setProperty("width", "33.3%")
-                document.querySelector(".changeWidthMinus").style.setProperty("display", "none")
-            }
+	document.querySelector(".changeWidthPlus").addEventListener("click", function() {
+			
+    	if (productWidth == 25) {
+        	productWidth = 33.3;
+    	} 
+    	else if (productWidth == 33.3) {
+        	productWidth = 50;
+    	}
 
-            if (product.offsetWidth == 33.3%) {
-                product.style.setProperty("width", "50%")
-                document.querySelector(".changeWidthMinus").style.setProperty("display", "block")
-            }
+    	document.querySelectorAll(".product").forEach(product => {
+        	product.style.width = productWidth + "%";
+    	});
 
-            if (product.offsetWidth == 50%) {
-                document.querySelector(".changeWidthPlus").style.setProperty("display", "none")
-            }
-            
-        });
-    }
+    	if (productWidth == 50) {
+        	document.querySelector(".changeWidthPlus").style.display = "none";
+    	}
 
-    document.querySelector(".changeWidthMinus").addEventListener("click", function(){
-        document.querySelectorAll(".product").forEach(product => {
+    	if (productWidth > 25) {
+        	document.querySelector(".changeWidthMinus").style.display = "block";
+    	}
 
-            if (product.offsetWidth == 50%) {
-                product.style.setProperty("width", "33.3%")
-            }
+	});
 
-            if (product.offsetWidth == 33.3%) {
-                product.style.setProperty("width", "25%")
-                document.querySelector(".changeWidthPlus").style.setProperty("display", "block")
-            }
 
-            if (product.offsetWidth == 25%) {
-                document.querySelector(".changeWidthMinus").style.setProperty("display", "none")
-            }
-            
-        });
-    }                                                            
+	document.querySelector(".changeWidthMinus").addEventListener("click", function() {
+
+    	if (productWidth == 50) {
+        	productWidth = 33.3;
+    	} 
+    	else if (productWidth == 33.3) {
+        	productWidth = 25;
+    	}
+
+    	document.querySelectorAll(".product").forEach(product => {
+        	product.style.width = productWidth + "%";
+    	});
+
+    	if (productWidth == 25) {
+        	document.querySelector(".changeWidthMinus").style.display = "none";
+    	}
+
+    	if (productWidth < 50) {
+       	 	document.querySelector(".changeWidthPlus").style.display = "block";
+    	}
+
+	});                                                          
                                                                 
 }
 
