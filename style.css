@@ -93,6 +93,7 @@ a{
     height: 45px;
     z-index: 999999999 !important;
     cursor: default;
+    transition: width 0.3s ease;
 }
 
 .changeWidthMinus{
