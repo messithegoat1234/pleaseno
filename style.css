@@ -19,15 +19,11 @@
     display: block;
 }
 
-.product-image img {
-    width: 100%;
-    display: block;
-}
-
 .colors {
     display: flex;
     gap: 8px;
     margin: auto;
+    z-index: 999999999999999999999 !important;
     justify-content: center;
 }
 
@@ -35,12 +31,51 @@
     width: 18px;
     height: 18px;
     border: 2px solid rgb(226, 226, 226);
+    z-index: 999999999999999999999 !important;
     box-sizing: border-box;
     outline: 1px solid black;
     cursor: pointer;
 }
 
-.description {
+
+#nav{
+    width: 100%;
+    height: fit-content;
+    margin-top: 30px;
+}
+
+#nav img{
+    height: 100px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.product-image img {
+    display: block;
+    width: 100%;
+}
+
+*{
+    font-family:'Montserrat', sans-serif; 
+}
+
+@media (max-width: 768px) {
+    .product {
+        width: 50%;
+        margin: -40px 0px 30px 0px
+    }
+}
+
+
+@media (max-width: 1100px) and (min-width: 769px) {
+    .product {
+        width: 33.3%;
+        margin: -40px 0px 30px 0px
+    }
+}
+
+.description{
     font-weight: bold;
     text-align: center;
     font-size: 17px;
@@ -48,72 +83,27 @@
     color: black;
 }
 
-a {
+a{
     text-decoration: none;
 }
 
-#changeWidth {
+.changeWidthPlus, .changeWidthMinus{
+    font-size: 45px;
+    width: 45px;
+    height: 45px;
+    z-index: 999999999 !important;
+    cursor: default;
+    transition: width 0.3s ease;
+}
+
+.changeWidthMinus{
+    display: none; 
+}
+
+#changeWidth{
     display: flex;
     width: 100%;
     max-width: 1400px;
     margin: auto;
-}
-
-.changeWidthPlus,
-.changeWidthMinus {
-    font-size: 45px;
-    width: 45px;
-    height: 45px;
-    cursor: pointer;
-}
-
-.changeWidthMinus {
-    display: none;
-}
-
-
-@media (max-width: 1100px) and (min-width: 769px) {
-
-    .product {
-        width: 33.3%;
-        padding: 12px;
-    }
-
-}
-
-
-@media (max-width: 768px) {
-
-    .product {
-        width: 50%;
-        padding: 8px;
-    }
-
-    .description {
-        font-size: 14px;
-        margin-top: 15px;
-    }
-
-    .colors {
-        gap: 6px;
-    }
-
-    .color-dot {
-        width: 15px;
-        height: 15px;
-    }
-
-}
-
-
-@media (max-width: 450px) {
-
-    .product {
-        padding: 5px;
-    }
-
-    .description {
-        font-size: 12px;
-    }
-
+    z-index: 999999999 !important;
 }
