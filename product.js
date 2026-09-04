@@ -42,6 +42,17 @@ async function showProduct() {
             "UNISEX\n230GSM\n100% COTTON\nOVERSIZED\nWASHED";
     }
 
+
+    if (
+        product.website_name === "warning-sign-tee" &&
+        choice === "BLACK" || choice === "WHITE" || choice === "GREY"
+    ) {
+        product.description =
+            "UNISEX\n230GSM\n100% COTTON\nOVERSIZED";
+        product.sizes = "XS S M L XL 2XL 3XL"
+    }
+
+    
     container.innerHTML = `
         <div class="product-page">
 
@@ -153,6 +164,16 @@ async function showProduct() {
             }
 
 
+            if (
+                product.website_name === "warning-sign-tee" &&
+                choice === "BLACK" || choice === "WHITE" || choice === "GREY"
+            ) {
+                product.description =
+                        "UNISEX\n230GSM\n100% COTTON\nOVERSIZED";
+                product.sizes = "XS S M L XL 2XL 3XL"
+            }            
+
+            
             document.querySelector("#front").src =
                 `files_webp/${selectedProduct.imagefront.replace(
                     /\.[^/.]+$/,
