@@ -19,7 +19,7 @@ async function showProducts() {
         products[item.website_name].colors.push(item);
     });
 
-
+    
     Object.values(products).forEach(product => {
 
         let colorsHTML = "";
@@ -123,7 +123,46 @@ async function showProducts() {
         });
 
     });
+    
+    document.querySelector(".changeWidthPlus").addEventListener("click", function(){
+        document.querySelectorAll(".product").forEach(product => {
 
+            if (product.offsetWidth == 25%) {
+                product.style.setProperty("width", "33.3%")
+                document.querySelector(".changeWidthMinus").style.setProperty("display", "none")
+            }
+
+            if (product.offsetWidth == 33.3%) {
+                product.style.setProperty("width", "50%")
+                document.querySelector(".changeWidthMinus").style.setProperty("display", "block")
+            }
+
+            if (product.offsetWidth == 50%) {
+                document.querySelector(".changeWidthPlus").style.setProperty("display", "none")
+            }
+            
+        });
+    }
+
+    document.querySelector(".changeWidthMinus").addEventListener("click", function(){
+        document.querySelectorAll(".product").forEach(product => {
+
+            if (product.offsetWidth == 50%) {
+                product.style.setProperty("width", "33.3%")
+            }
+
+            if (product.offsetWidth == 33.3%) {
+                product.style.setProperty("width", "25%")
+                document.querySelector(".changeWidthPlus").style.setProperty("display", "block")
+            }
+
+            if (product.offsetWidth == 25%) {
+                document.querySelector(".changeWidthMinus").style.setProperty("display", "none")
+            }
+            
+        });
+    }                                                            
+                                                                
 }
 
 showProducts();
