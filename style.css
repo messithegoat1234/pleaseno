@@ -86,3 +86,11 @@ a{
     text-decoration: none;
 }
 
+.changeWidthPlus, .changeWidthMinus{
+    font-size: 45px
+}
+
+#changeWidth{
+    display: flex;
+    justify-content: center;
+}
