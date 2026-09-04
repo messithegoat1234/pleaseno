@@ -92,7 +92,7 @@ a{
     width: 45px;
     height: 45px;
     z-index: 999999999 !important;
-    cursor: pointer;
+    cursor: default;
 }
 
 .changeWidthMinus{
