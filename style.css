@@ -94,10 +94,9 @@ a{
     z-index: 999999999 !important;
 }
 
-.changeWidthMinus > *, .changeWidthPlus > * {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+.changeWidthMinus {
+    position: relative;
+    top: -4px;
 }
 
 
