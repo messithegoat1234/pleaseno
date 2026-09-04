@@ -1,3 +1,4 @@
+
 async function showProducts() {
 
     let res = await fetch("https://pleaseno.onrender.com/products");
@@ -123,59 +124,73 @@ async function showProducts() {
         });
 
     });
-    
+
+
+    /* =========================
+       ZMIANA SZEROKOŚCI PRODUKTÓW
+       ========================= */
+
     let productWidth = 25;
 
-	document.querySelector(".changeWidthPlus").addEventListener("click", function() {
-			
-    	if (productWidth == 25) {
-        	productWidth = 33.3;
-    	} 
-    	else if (productWidth == 33.3) {
-        	productWidth = 50;
-    	}
-
-    	document.querySelectorAll(".product").forEach(product => {
-        	product.style.width = productWidth + "%";
-    	});
-
-    	if (productWidth == 50) {
-        	document.querySelector(".changeWidthPlus").style.display = "none";
-			document.querySelector("#products").style.margin = "-70px auto 50px";
-    	}
-
-    	if (productWidth > 25) {
-        	document.querySelector(".changeWidthMinus").style.display = "block";
-    	}
-
-	});
+    const plusButton = document.querySelector(".changeWidthPlus");
+    const minusButton = document.querySelector(".changeWidthMinus");
+    const productsElements = document.querySelectorAll(".product");
+    const productsContainer = document.querySelector("#products");
 
 
-	document.querySelector(".changeWidthMinus").addEventListener("click", function() {
+    plusButton.addEventListener("click", function() {
 
-    	if (productWidth == 50) {
-        	productWidth = 33.3;
-    	} 
-    	else if (productWidth == 33.3) {
-        	productWidth = 25;
-    	}
+        if (productWidth === 25) {
+            productWidth = 33.3;
+        }
+        else if (productWidth === 33.3) {
+            productWidth = 50;
+        }
 
-    	document.querySelectorAll(".product").forEach(product => {
-        	product.style.width = productWidth + "%";
-    	});
+        productsElements.forEach(product => {
+            product.style.width = productWidth + "%";
+        });
 
-    	if (productWidth == 25) {
-        	document.querySelector(".changeWidthMinus").style.display = "none";
-    	}
 
-    	if (productWidth < 50) {
-       	 	document.querySelector(".changeWidthPlus").style.display = "block";
-			document.querySelector("#products").style.margin = "0 auto 50px";
-    	}
+        if (productWidth === 50) {
+            plusButton.style.display = "none";
+            minusButton.style.display = "block";
 
-	});
+            productsContainer.style.margin = "-70px auto 50px";
+        }
+        else {
+            minusButton.style.display = "block";
+        }
 
-                                                                
+    });
+
+
+    minusButton.addEventListener("click", function() {
+
+        if (productWidth === 50) {
+            productWidth = 33.3;
+        }
+        else if (productWidth === 33.3) {
+            productWidth = 25;
+        }
+
+        productsElements.forEach(product => {
+            product.style.width = productWidth + "%";
+        });
+
+
+        if (productWidth === 25) {
+            minusButton.style.display = "none";
+            plusButton.style.display = "block";
+
+            productsContainer.style.margin = "0 auto 50px";
+        }
+        else {
+            plusButton.style.display = "block";
+        }
+
+    });
+
 }
 
 showProducts();
