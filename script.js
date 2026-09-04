@@ -141,6 +141,7 @@ async function showProducts() {
 
     	if (productWidth == 50) {
         	document.querySelector(".changeWidthPlus").style.display = "none";
+			document.querySelector("#products").style.margin = "-70px auto 50px";
     	}
 
     	if (productWidth > 25) {
@@ -169,13 +170,11 @@ async function showProducts() {
 
     	if (productWidth < 50) {
        	 	document.querySelector(".changeWidthPlus").style.display = "block";
+			document.querySelector("#products").style.margin = "0 auto 50px";
     	}
 
 	});
 
-	if (productWidth == 50) {
-        document.querySelector("#products").style.margin = "-70px auto 50px";
-    } 
                                                                 
 }
 
