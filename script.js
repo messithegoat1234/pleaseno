@@ -141,11 +141,7 @@ async function showProducts() {
 
     	if (productWidth == 50) {
         	document.querySelector(".changeWidthPlus").style.display = "none";
-			document.querySelector("#products").style.setProperty("margin", "10px auto 50px")
     	}
-		else{
-			document.querySelector("#products").style.setProperty("margin", "70px auto 50px")
-		}
 
     	if (productWidth > 25) {
         	document.querySelector(".changeWidthMinus").style.display = "block";
