@@ -94,6 +94,13 @@ a{
     z-index: 999999999 !important;
 }
 
+.changeWidthMinus > *, .changeWidthPlus > * {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
 @media (max-width: 768px) {
     #products{
         margin: 50px auto 50px;
