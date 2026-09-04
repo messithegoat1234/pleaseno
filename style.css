@@ -92,6 +92,10 @@ a{
     height: 45px;
 }
 
+.changeWidthMinus{
+    display: none;
+}
+
 #changeWidth{
     display: flex;
     width: 100%;
