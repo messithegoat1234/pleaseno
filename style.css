@@ -130,6 +130,8 @@ a{
     color: black;
     margin-left: 20px;
     font-size: 20px;
+    right: 700px;
+    transition-duration: 0.5s;
 }
 
 #menu div{
@@ -138,7 +140,6 @@ a{
 
 #menu a{
     color: black;
-    display: none;
     margin: 20px 0px 0px 0px;
 }
 
