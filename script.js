@@ -461,6 +461,11 @@ document.querySelector(".showMenuButton").addEventListener("click", function() {
         document.querySelector(".menuSection").style.width = "100%";
         document.querySelector("#categoriesText").style.margin = "0";
         document.querySelector("#menu").style.margin = "0";
+        document.querySelector("#menu").style.width = "100%"; 
+        document.querySelectorAll("#menu a").forEach(a => {
+            a.style.width = "100%";
+            a.style.textAlign = "center";
+        });
     }
 });
 
