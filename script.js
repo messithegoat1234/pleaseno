@@ -358,6 +358,36 @@ function displayProducts(data) {
 
 }
 
+async function loadMenu() {
+    let menu = document.querySelector("#menu");
+    let categoriesRes =
+        await fetch("https://pleaseno.onrender.com/categories");
+
+    let categories =
+        await categoriesRes.json();
+
+
+    let typesRes =
+        await fetch("https://pleaseno.onrender.com/types");
+
+    let types =
+        await typesRes.json();
+
+    menu.innerHTML = "";
+
+    categories.forEach(category => {
+
+        menu.innerHTML += `
+            <a href="/?category=${encodeURIComponent(category)}">
+                <div class='menuOption'>
+                    ${category}
+                </div>
+            </a>
+        `;
+
+    });
+
+}
 
 async function loadProducts() {
 
@@ -441,3 +471,4 @@ async function loadProducts() {
 
 
 loadProducts();
+loadMenu();
