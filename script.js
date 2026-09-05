@@ -341,8 +341,6 @@ async function loadMenu() {
 
 
     menu.innerHTML = "";
-
-    menu.innerHTML += "<p style='font-size: 40px;margin: 0; text-align: left; color: black;'>&gt;</p>"
     menu.innerHTML += "<p>COLLECTIONS</p>"
     categories.forEach(category => {
 
