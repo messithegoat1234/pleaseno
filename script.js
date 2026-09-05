@@ -322,11 +322,11 @@ async function loadMenu() {
 
     let menu = document.querySelector("#menu");
 
-    let categoriesRes = await fetch(
+    let collectionsRes = await fetch(
         "https://pleaseno.onrender.com/collections"
     );
 
-    let categories = await categoriesRes.json();
+    let collections = await collectionsRes.json();
 
     let categoriesRes = await fetch(
         "https://pleaseno.onrender.com/categories"
