@@ -341,7 +341,7 @@ async function loadMenu() {
 
 
     menu.innerHTML = "";
-    menu.innerHTML += "<p>COLLECTIONS</p>"
+    menu.innerHTML += "<div><p>COLLECTIONS</p>"
     categories.forEach(category => {
 
         let slug = slugify(category);
@@ -355,7 +355,7 @@ async function loadMenu() {
         `;
     });
 
-    menu.innerHTML += "<p style='margin: 40px 0 0 0'>CATEGORIES</p>"
+    menu.innerHTML += "</div><div><p style='margin: 40px 0 0 0'>CATEGORIES</p>"
     types.forEach(type => {
         let slug = slugify(type);
         
@@ -366,8 +366,9 @@ async function loadMenu() {
                 </div>
             </a>
         `;
-
     });
+
+    menu.innerHTML += "</div>
 
 }
 
@@ -433,6 +434,11 @@ document.querySelector(".showMenuButton").addEventListener("click", function() {
     document.querySelector("#menu").style.right = "0";
     this.style.display = "none";
     document.querySelector(".hideMenuButton").style.display = "block";
+
+    if (window.innerWidth <= 768) {
+        document.querySelector("#menu").style.height = "550px";   
+        document.querySelector("#menu").style.display = "flex";   
+    }
 });
 
 
@@ -440,6 +446,10 @@ document.querySelector(".hideMenuButton").addEventListener("click", function() {
     document.querySelector("#menu").style.right = "700px";
     this.style.display = "none";
     document.querySelector(".showMenuButton").style.display = "block";
+    if (window.innerWidth <= 768) {
+        document.querySelector("#menu").style.height = "0";   
+        document.querySelector("#menu").style.display = "block";   
+    }
 });
 
 loadProducts();
