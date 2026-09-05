@@ -108,7 +108,7 @@ def home():
     )
 
 @app.route("/collections/<collection>")
-def collection_page(category):
+def collection_page(collection):
 
     return send_from_directory(
         BASE_DIR,
@@ -117,7 +117,7 @@ def collection_page(category):
 
 
 @app.route("/categories/<category>")
-def category_page(type):
+def category_page(category):
 
     return send_from_directory(
         BASE_DIR,
@@ -216,10 +216,10 @@ def show_products():
 
 
 
-@app.route("/products/collection/<category>")
-def show_products_by_category(category):
+@app.route("/products/collection/<collection>")
+def show_products_by_collection(collection):
 
-    category = category.replace("-", " ").upper()
+    collection = collection.replace("-", " ").upper()
 
     query = PRODUCT_QUERY + """
         WHERE products.category = %s
@@ -227,17 +227,17 @@ def show_products_by_category(category):
 
     products = get_products(
         query,
-        (category,)
+        (collection,)
     )
 
     return jsonify(products)
 
 
 
-@app.route("/products/type/<type>")
-def show_products_by_type(type):
+@app.route("/products/category/<category>")
+def show_products_by_category(category):
 
-    type = type.replace("-", " ").upper()
+    category = category.replace("-", " ").upper()
 
     query = PRODUCT_QUERY + """
         WHERE products.type = %s
@@ -245,7 +245,7 @@ def show_products_by_type(type):
 
     products = get_products(
         query,
-        (type,)
+        (category,)
     )
 
     return jsonify(products)
