@@ -55,7 +55,7 @@ def health_db():
 
 
 @app.route("/collections")
-def get_categories():
+def get_collections():
 
     connect = get_db()
     cursor = connect.cursor()
@@ -67,17 +67,17 @@ def get_categories():
         AND category != ''
     """)
 
-    categories = cursor.fetchall()
+    collections = cursor.fetchall()
 
     cursor.close()
     connect.close()
 
     return jsonify([
-        row[0] for row in categories
+        row[0] for row in collections
     ])
 
-@app.route("/types")
-def get_types():
+@app.route("/categories")
+def get_categories():
 
     connect = get_db()
     cursor = connect.cursor()
@@ -89,13 +89,13 @@ def get_types():
         AND type != ''
     """)
 
-    types = cursor.fetchall()
+    categories = cursor.fetchall()
 
     cursor.close()
     connect.close()
 
     return jsonify([
-        row[0] for row in types
+        row[0] for row in categories
     ])
 
 
@@ -107,7 +107,7 @@ def home():
         "index.html"
     )
 
-@app.route("/collections/<category>")
+@app.route("/collections/<collection>")
 def collection_page(category):
 
     return send_from_directory(
@@ -116,8 +116,8 @@ def collection_page(category):
     )
 
 
-@app.route("/types/<type>")
-def type_page(type):
+@app.route("/categories/<category>")
+def category_page(type):
 
     return send_from_directory(
         BASE_DIR,
