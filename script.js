@@ -322,53 +322,73 @@ async function loadMenu() {
 
     let menu = document.querySelector("#menu");
 
-    let categoriesRes =
-        await fetch(
-            "https://pleaseno.onrender.com/collections"
-        );
+    let categoriesRes = await fetch(
+        "https://pleaseno.onrender.com/collections"
+    );
 
-    let categories =
-        await categoriesRes.json();
+    let categories = await categoriesRes.json();
 
+    let typesRes = await fetch(
+        "https://pleaseno.onrender.com/types"
+    );
 
-    let typesRes =
-        await fetch(
-            "https://pleaseno.onrender.com/types"
-        );
-
-    let types =
-        await typesRes.json();
+    let types = await typesRes.json();
 
 
-    menu.innerHTML = "";
-    menu.innerHTML += "<div><p>COLLECTIONS</p>"
+    let categoriesHTML = "";
+    let typesHTML = "";
+
+
     categories.forEach(category => {
 
         let slug = slugify(category);
 
-        menu.innerHTML += `
+        categoriesHTML += `
             <a href="/collections/${slug}">
                 <div class="menuOption">
                     ${category}
                 </div>
             </a>
         `;
+
     });
 
-    menu.innerHTML += "</div><div><p style='margin: 40px 0 0 0'>CATEGORIES</p>"
+
     types.forEach(type => {
+
         let slug = slugify(type);
-        
-        menu.innerHTML += `
+
+        typesHTML += `
             <a href="/types/${slug}">
                 <div class="menuOption">
                     ${type}
                 </div>
             </a>
         `;
+
     });
 
-    menu.innerHTML += "</div>";
+
+    menu.innerHTML = `
+
+        <div class="menuSection">
+
+            <p>COLLECTIONS</p>
+
+            ${categoriesHTML}
+
+        </div>
+
+
+        <div class="menuSection">
+
+            <p>CATEGORIES</p>
+
+            ${typesHTML}
+
+        </div>
+
+    `;
 
 }
 
