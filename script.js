@@ -382,7 +382,7 @@ async function loadMenu() {
 
         <div class="menuSection">
 
-            <p>CATEGORIES</p>
+            <p style='margin-top: 40px;'>CATEGORIES</p>
 
             ${typesHTML}
 
