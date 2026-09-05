@@ -431,18 +431,17 @@ async function loadProducts() {
 
 }
 
-document.querySelector(".showMenuButton").addEventListener("click", function(){
-    document.querySelector("#menu").style.setProperty("right", "0")
-    document.querySelector(".showMenuButton").innerHTML = "<";
-    document.querySelector(".showMenuButton").classList.add('hideMenuButton');
-    document.querySelector(".hideMenuButton").classList.remove(".showMenuButton");
+document.querySelector(".showMenuButton").addEventListener("click", function() {
+    document.querySelector("#menu").style.right = "0";
+    this.style.display = "none";
+    document.querySelector(".hideMenuButton").style.display = "block";
 });
 
-document.querySelector(".hideMenuButton").addEventListener("click", function(){
-    document.querySelector("#menu").style.setProperty("right", "0")
-    document.querySelector(".hideMenuButton").innerHTML = ">";
-    document.querySelector(".hideMenuButton").classList.add('hideMenuButton');
-    document.querySelector(".showMenuButton").classList.remove(".hideMenuButton");
+
+document.querySelector(".hideMenuButton").addEventListener("click", function() {
+    document.querySelector("#menu").style.right = "-300px";
+    this.style.display = "none";
+    document.querySelector(".showMenuButton").style.display = "block";
 });
 
 loadProducts();
