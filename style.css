@@ -150,6 +150,26 @@ a{
     color: red;
     font-weight: bold;
 }
+
+#menu p:hover{
+    text-decoration: underline;
+}
+
+#showMenu{
+    width: 0;
+    height: 0;
+    position: relative;
+    margin-left: 20px;
+    top: 105px;
+}
+
+#showMenuButton{
+    font-size: 40px;
+    margin: 0;
+    text-align: left;
+    color: black;
+    cursor: pointer;
+}
 @media (max-width: 768px) {
     #products{
         margin: 50px auto 50px;
