@@ -410,7 +410,7 @@ async function loadProducts() {
     else if (parts[0] === "categories" && parts[1]) {
 
         url =
-            `https://pleaseno.onrender.com/products/categories/${parts[1]}`;
+            `https://pleaseno.onrender.com/products/category/${parts[1]}`;
 
     }
 
