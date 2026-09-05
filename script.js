@@ -64,12 +64,12 @@ function displayProducts(data) {
                 <span
                     class="color-dot"
 
-                    data-front="files_webp/${color.imagefront.replace(
+                    data-front="/files_webp/${color.imagefront.replace(
                         /\.[^/.]+$/,
                         ".webp"
                     )}"
 
-                    data-back="files_webp/${color.imageback.replace(
+                    data-back="/files_webp/${color.imageback.replace(
                         /\.[^/.]+$/,
                         ".webp"
                     )}"
@@ -91,14 +91,14 @@ function displayProducts(data) {
 
 
         let frontImage =
-            `files_webp/${product.imagefront.replace(
+            `/files_webp/${product.imagefront.replace(
                 /\.[^/.]+$/,
                 ".webp"
             )}`;
 
 
         let backImage =
-            `files_webp/${product.imageback.replace(
+            `/files_webp/${product.imageback.replace(
                 /\.[^/.]+$/,
                 ".webp"
             )}`;
