@@ -382,7 +382,7 @@ async function loadMenu() {
 
         <div class="menuSection">
 
-            <p id='iesText'>CATEGORIES</p>
+            <p id='categoriesText'>CATEGORIES</p>
 
             ${categoriesHTML}
 
