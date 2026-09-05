@@ -85,7 +85,9 @@ def show_products():
             product_colors.color,
             product_images.imagefront,
             product_images.imageback,
-            products.price
+            products.price,
+            products.category,
+            products.type
         FROM products
         JOIN product_colors
             ON product_colors.product_id = products.id
@@ -109,10 +111,83 @@ def show_products():
             "color": row[3],
             "imagefront": row[4],
             "imageback": row[5],
-            "price": row[6]
         }
         for row in result
     ])
+
+@app.route("/collection/<category>")
+def show_by_category(category):
+    connect = get_db()
+    cursor = connect.cursor(dictionary=True)
+
+    cursor.execute("""
+        SELECT
+            products.id,
+            products.name,
+            products.website_name,
+            products.description,
+            products.sizeGuideLink,
+            products.sizes,
+            product_colors.id AS color_id,
+            product_colors.color,
+            product_images.imagefront,
+            product_images.imageback,
+            products.price
+        FROM products
+        JOIN product_colors
+            ON product_colors.product_id = products.id
+        JOIN product_images
+            ON product_images.product_id = products.id
+            AND product_images.color_id = product_colors.id
+        WHERE products.category = %s
+    """, (category,))
+
+    products = cursor.fetchall()
+
+    cursor.close()
+    connect.close()
+
+    if not products:
+        return jsonify({"error": "No products found in this category"}), 404
+
+    return jsonify(products)
+
+@app.route("/type/<type>")
+def show_by_type(type):
+    connect = get_db()
+    cursor = connect.cursor(dictionary=True)
+
+    cursor.execute("""
+        SELECT
+            products.id,
+            products.name,
+            products.website_name,
+            products.description,
+            products.sizeGuideLink,
+            products.sizes,
+            product_colors.id AS color_id,
+            product_colors.color,
+            product_images.imagefront,
+            product_images.imageback,
+            products.price
+        FROM products
+        JOIN product_colors
+            ON product_colors.product_id = products.id
+        JOIN product_images
+            ON product_images.product_id = products.id
+            AND product_images.color_id = product_colors.id
+        WHERE products.type = %s
+    """, (type,))
+
+    products = cursor.fetchall()
+
+    cursor.close()
+    connect.close()
+
+    if not products:
+        return jsonify({"error": "No products found in this category"}), 404
+
+    return jsonify(products)
 
 
 @app.route("/products/<website_name>")
