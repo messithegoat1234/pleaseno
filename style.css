@@ -1,3 +1,19 @@
+body, html{
+    overflow-x: hidden;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family:'Montserrat', sans-serif;
+    margin: 0;
+    min-height: 100vh;
+}
+
+body::-webkit-scrollbar{
+    display: none;
+}
+
 #products {
     width: 100%;
     max-width: 1400px;
@@ -51,6 +67,13 @@
     justify-content: center;
 }
 
+#nav a{
+    width: fit-content;
+    height: fit-content;
+    display: block;
+    margin: auto;
+}
+
 .product-image img {
     display: block;
     width: 100%;
@@ -99,7 +122,34 @@ a{
     top: -4px;
 }
 
+#menu{
+    height: 0;
+    width: 200px;
+    position: relative;
+    top: 150px;
+    color: black;
+    margin-left: 20px;
+    font-size: 20px;
 
+}
+
+#menu div{
+    width: 200px;
+}
+
+#menu a{
+    color: black;
+    display: none;
+    margin: 20px 0px 0px 0px;
+}
+
+#menu p {
+    margin: auto;
+    text-align: center;
+    font-size: 15px;
+    color: red;
+    font-weight: bold;
+}
 @media (max-width: 768px) {
     #products{
         margin: 50px auto 50px;
