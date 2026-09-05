@@ -54,7 +54,7 @@ def health_db():
     return "OK"
 
 
-@app.route("/categories")
+@app.route("/collections")
 def get_categories():
 
     connect = get_db()
@@ -76,26 +76,26 @@ def get_categories():
         row[0] for row in categories
     ])
 
-@app.route("/categories")
-def get_categories():
+@app.route("/types")
+def get_types():
 
     connect = get_db()
     cursor = connect.cursor()
 
     cursor.execute("""
-        SELECT DISTINCT category
+        SELECT DISTINCT type
         FROM products
-        WHERE category IS NOT NULL
-        AND category != ''
+        WHERE type IS NOT NULL
+        AND type != ''
     """)
 
-    categories = cursor.fetchall()
+    types = cursor.fetchall()
 
     cursor.close()
     connect.close()
 
     return jsonify([
-        row[0] for row in categories
+        row[0] for row in types
     ])
 
 
@@ -201,7 +201,7 @@ def show_products():
 
 
 
-@app.route("/products/category/<category>")
+@app.route("/products/collection/<category>")
 def show_products_by_category(category):
 
     query = PRODUCT_QUERY + """
