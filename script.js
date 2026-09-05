@@ -373,7 +373,7 @@ async function loadMenu() {
 
         <div class="menuSection">
 
-            <p>COLLECTIONS</p>
+            <p id='collectionsText'>COLLECTIONS</p>
 
             ${categoriesHTML}
 
@@ -382,7 +382,7 @@ async function loadMenu() {
 
         <div class="menuSection">
 
-            <p style='margin-top: 40px;'>CATEGORIES</p>
+            <p id='categoriesText'>CATEGORIES</p>
 
             ${typesHTML}
 
@@ -456,9 +456,11 @@ document.querySelector(".showMenuButton").addEventListener("click", function() {
     document.querySelector(".hideMenuButton").style.display = "block";
 
     if (window.innerWidth <= 768) {
-        document.querySelector("#menu").style.height = "550px";   
+        document.querySelector("#menu").style.height = "370px";   
         document.querySelector("#menu").style.display = "flex";
-        document.querySelector("#menu").style.width = "50%"; 
+        document.querySelector(".menuSection").style.width = "100%";
+        document.querySelector("#categoriesText").style.margin = "0";
+        document.querySelector("#menu").style.margin = "0";
     }
 });
 
