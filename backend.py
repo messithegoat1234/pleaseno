@@ -65,62 +65,27 @@ def files_webp(filename):
         filename
     )
 
+def get_products(query, params=()):
+
+    connect = get_db()
+    cursor = connect.cursor(dictionary=True)
+
+    cursor.execute(query, params)
+
+    products = cursor.fetchall()
+
+    cursor.close()
+    connect.close()
+
+    return products
+
 
 @app.route("/products")
 def show_products():
 
     start = time.time()
 
-    connect = get_db()
-
-    print("DB CONNECT:", time.time() - start)
-
-    cursor = connect.cursor()
-
-    cursor.execute("""
-        SELECT
-            products.id,
-            products.name,
-            products.website_name,
-            product_colors.color,
-            product_images.imagefront,
-            product_images.imageback,
-            products.price,
-            products.category,
-            products.type
-        FROM products
-        JOIN product_colors
-            ON product_colors.product_id = products.id
-        JOIN product_images
-            ON product_images.product_id = products.id
-            AND product_images.color_id = product_colors.id
-    """)
-
-    result = cursor.fetchall()
-
-    cursor.close()
-    connect.close()
-
-    print("TOTAL:", time.time() - start)
-
-    return jsonify([
-        {
-            "id": row[0],
-            "name": row[1],
-            "website_name": row[2],
-            "color": row[3],
-            "imagefront": row[4],
-            "imageback": row[5],
-        }
-        for row in result
-    ])
-
-@app.route("/collection/<category>")
-def show_by_category(category):
-    connect = get_db()
-    cursor = connect.cursor(dictionary=True)
-
-    cursor.execute("""
+    query = """
         SELECT
             products.id,
             products.name,
@@ -128,36 +93,84 @@ def show_by_category(category):
             products.description,
             products.sizeGuideLink,
             products.sizes,
+
             product_colors.id AS color_id,
             product_colors.color,
+
             product_images.imagefront,
             product_images.imageback,
-            products.price
+
+            products.price,
+            products.category,
+            products.type
+
         FROM products
+
         JOIN product_colors
             ON product_colors.product_id = products.id
+
         JOIN product_images
             ON product_images.product_id = products.id
             AND product_images.color_id = product_colors.id
+    """
+
+    products = get_products(query)
+
+    print("TOTAL:", time.time() - start)
+
+    return jsonify(products)
+
+@app.route("/collection/<category>")
+def show_by_category(category):
+
+    query = """
+        SELECT
+            products.id,
+            products.name,
+            products.website_name,
+            products.description,
+            products.sizeGuideLink,
+            products.sizes,
+
+            product_colors.id AS color_id,
+            product_colors.color,
+
+            product_images.imagefront,
+            product_images.imageback,
+
+            products.price,
+            products.category,
+            products.type
+
+        FROM products
+
+        JOIN product_colors
+            ON product_colors.product_id = products.id
+
+        JOIN product_images
+            ON product_images.product_id = products.id
+            AND product_images.color_id = product_colors.id
+
         WHERE products.category = %s
-    """, (category,))
+    """
 
-    products = cursor.fetchall()
-
-    cursor.close()
-    connect.close()
+    products = get_products(
+        query,
+        (category,)
+    )
 
     if not products:
-        return jsonify({"error": "No products found in this category"}), 404
+
+        return jsonify({
+            "error": "No products found in this collection"
+        }), 404
 
     return jsonify(products)
 
 @app.route("/type/<type>")
 def show_by_type(type):
-    connect = get_db()
-    cursor = connect.cursor(dictionary=True)
 
-    cursor.execute("""
+    query = """
         SELECT
             products.id,
             products.name,
@@ -165,38 +178,48 @@ def show_by_type(type):
             products.description,
             products.sizeGuideLink,
             products.sizes,
+
             product_colors.id AS color_id,
             product_colors.color,
+
             product_images.imagefront,
             product_images.imageback,
-            products.price
+
+            products.price,
+            products.category,
+            products.type
+
         FROM products
+
         JOIN product_colors
             ON product_colors.product_id = products.id
+
         JOIN product_images
             ON product_images.product_id = products.id
             AND product_images.color_id = product_colors.id
+
         WHERE products.type = %s
-    """, (type,))
+    """
 
-    products = cursor.fetchall()
-
-    cursor.close()
-    connect.close()
+    products = get_products(
+        query,
+        (type,)
+    )
 
     if not products:
-        return jsonify({"error": "No products found in this category"}), 404
+
+        return jsonify({
+            "error": "No products found for this type"
+        }), 404
 
     return jsonify(products)
+
 
 
 @app.route("/products/<website_name>")
 def get_product(website_name):
 
-    connect = get_db()
-    cursor = connect.cursor(dictionary=True)
-
-    cursor.execute("""
+    query = """
         SELECT
             products.id,
             products.name,
@@ -204,30 +227,41 @@ def get_product(website_name):
             products.description,
             products.sizeGuideLink,
             products.sizes,
+
             product_colors.id AS color_id,
             product_colors.color,
+
             product_images.imagefront,
             product_images.imageback,
-            products.price
+
+            products.price,
+            products.category,
+            products.type
+
         FROM products
+
         JOIN product_colors
             ON product_colors.product_id = products.id
+
         JOIN product_images
             ON product_images.product_id = products.id
             AND product_images.color_id = product_colors.id
+
         WHERE products.website_name = %s
-    """, (website_name,))
+    """
 
-    products = cursor.fetchall()
-
-    cursor.close()
-    connect.close()
+    products = get_products(
+        query,
+        (website_name,)
+    )
 
     if not products:
-        return jsonify({"error": "Product not found"}), 404
+
+        return jsonify({
+            "error": "Product not found"
+        }), 404
 
     return jsonify(products)
-
 
 if __name__ == "__main__":
     app.run(
