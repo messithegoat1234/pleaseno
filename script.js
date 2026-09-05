@@ -356,7 +356,7 @@ async function loadMenu() {
         `;
     });
 
-    menu.innerHTML += "<p>CATEGORIES</p>"
+    menu.innerHTML += "<p style='margin: 40px 0 0 0'>CATEGORIES</p>"
     types.forEach(type => {
         let slug = slugify(type);
         
