@@ -215,4 +215,11 @@ p#categoriesText{
     }
 }
 
+@media (min-width: 1100px) and (max-width: 1600px){
+    #changeWidth {
+        position: relative;
+        top: 50px;
+        left: 20px;
+    }
+}
 
