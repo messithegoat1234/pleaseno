@@ -54,6 +54,49 @@ def health_db():
     return "OK"
 
 
+@app.route("/categories")
+def get_categories():
+
+    connect = get_db()
+    cursor = connect.cursor()
+
+    cursor.execute("""
+        SELECT DISTINCT category
+        FROM products
+        WHERE category IS NOT NULL
+        AND category != ''
+    """)
+
+    categories = cursor.fetchall()
+
+    cursor.close()
+    connect.close()
+
+    return jsonify([
+        row[0] for row in categories
+    ])
+
+@app.route("/categories")
+def get_categories():
+
+    connect = get_db()
+    cursor = connect.cursor()
+
+    cursor.execute("""
+        SELECT DISTINCT category
+        FROM products
+        WHERE category IS NOT NULL
+        AND category != ''
+    """)
+
+    categories = cursor.fetchall()
+
+    cursor.close()
+    connect.close()
+
+    return jsonify([
+        row[0] for row in categories
+    ])
 
 
 @app.route("/")
