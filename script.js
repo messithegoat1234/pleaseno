@@ -4,10 +4,7 @@ function displayProducts(data) {
 
     container.innerHTML = "";
 
-
     let products = {};
-
-
 
     data.forEach(item => {
 
@@ -311,29 +308,62 @@ function displayProducts(data) {
     );
 }
 
+function slugify(text) {
+
+    return text
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, "-")
+        .replace(/[^\w-]/g, "");
+
+}
+
 async function loadMenu() {
+
     let menu = document.querySelector("#menu");
+
     let categoriesRes =
-        await fetch("https://pleaseno.onrender.com/collections");
+        await fetch(
+            "https://pleaseno.onrender.com/collections"
+        );
 
     let categories =
         await categoriesRes.json();
 
 
     let typesRes =
-        await fetch("https://pleaseno.onrender.com/types");
+        await fetch(
+            "https://pleaseno.onrender.com/types"
+        );
 
     let types =
         await typesRes.json();
 
+
     menu.innerHTML = "";
+
 
     categories.forEach(category => {
 
+        let slug = slugify(category);
+
         menu.innerHTML += `
-            <a href="/?category=${encodeURIComponent(category)}">
-                <div class='menuOption'>
+            <a href="/collections/${slug}">
+                <div class="menuOption">
                     ${category}
+                </div>
+            </a>
+        `;
+    });
+
+
+    types.forEach(type => {
+        let slug = slugify(type);
+        
+        menu.innerHTML += `
+            <a href="/types/${slug}">
+                <div class="menuOption">
+                    ${type}
                 </div>
             </a>
         `;
@@ -343,55 +373,61 @@ async function loadMenu() {
 }
 
 async function loadProducts() {
-    
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
 
-    const category =
-        params.get("category");
+    let path = window.location.pathname;
 
-    const type =
-        params.get("type");
+    let parts = path.split("/").filter(Boolean);
 
     let url;
 
-    if (category) {
+    if (parts[0] === "collections" && parts[1]) {
+
         url =
-            `https://pleaseno.onrender.com/products/category/${encodeURIComponent(category)}`;
+            `https://pleaseno.onrender.com/products/collection/${parts[1]}`;
+
     }
 
-    else if (type) {
-        url = `https://pleaseno.onrender.com/products/type/${encodeURIComponent(type)}`;
+    else if (parts[0] === "types" && parts[1]) {
+
+        url =
+            `https://pleaseno.onrender.com/products/type/${parts[1]}`;
+
     }
 
     else {
-        url = "https://pleaseno.onrender.com/products";
+
+        url =
+            "https://pleaseno.onrender.com/products";
+
     }
 
     try {
-        let res =
-            await fetch(url);
-        
+
+        let res = await fetch(url);
+
         if (!res.ok) {
+
             throw new Error(
                 `HTTP error: ${res.status}`
             );
+
         }
 
-        let data =
-            await res.json();
+        let data = await res.json();
 
         displayProducts(data);
+
     }
 
     catch (error) {
+
         console.error(
             "Error loading products:",
             error
         );
+
     }
+
 }
 
 
