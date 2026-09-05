@@ -183,6 +183,10 @@ p#categoriesText{
     margin: 40px 0 0 0;
 }
 
+.product:hover .name {
+    text-decoration: underline;
+}
+
 @media (max-width: 768px) {
     #products{
         margin: 50px auto 50px;
