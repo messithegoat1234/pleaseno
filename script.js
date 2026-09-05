@@ -368,7 +368,7 @@ async function loadMenu() {
         `;
     });
 
-    menu.innerHTML += "</div>
+    menu.innerHTML += "</div>";
 
 }
 
