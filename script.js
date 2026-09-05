@@ -437,7 +437,7 @@ document.querySelector(".showMenuButton").addEventListener("click", function() {
 
 
 document.querySelector(".hideMenuButton").addEventListener("click", function() {
-    document.querySelector("#menu").style.right = "-300px";
+    document.querySelector("#menu").style.right = "700px";
     this.style.display = "none";
     document.querySelector(".showMenuButton").style.display = "block";
 });
