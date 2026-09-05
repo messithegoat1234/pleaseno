@@ -228,82 +228,52 @@ function displayProducts(data) {
 
             }
         );
-
     });
-
 
     let productWidth = 25;
 
-
     let plusButton =
-        document.querySelector(
-            ".changeWidthPlus"
-        );
-
+        document.querySelector(".changeWidthPlus");
 
     let minusButton =
-        document.querySelector(
-            ".changeWidthMinus"
-        );
-
+        document.querySelector(".changeWidthMinus");
 
     let productsElements =
-        document.querySelectorAll(
-            ".product"
-        );
-
+        document.querySelectorAll(".product");
 
     let productsContainer =
-        document.querySelector(
-            "#products"
-        );
+        document.querySelector("#products");
 
-
-    plusButton.addEventListener(
-        "click",
-        function() {
-
+    plusButton.addEventListener("click",function() {
+        
             if (productWidth == 25) {
-
                 productWidth = 33.3;
-
             }
 
             else if (productWidth == 33.3) {
-
                 productWidth = 50;
-
             }
-
 
             productsElements.forEach(
                 product => {
-
                     product.style.width =
                         productWidth + "%";
-
                 }
             );
 
-
             if (productWidth == 50) {
-
                 plusButton.style.display =
                     "none";
 
                 productsContainer.style.margin =
                     "-70px auto 50px";
-
             }
 
 
             if (productWidth > 25) {
-
                 minusButton.style.display =
                     "block";
-
             }
-
         }
     );
 
@@ -311,57 +281,40 @@ function displayProducts(data) {
     minusButton.addEventListener(
         "click",
         function() {
-
             if (productWidth == 50) {
-
                 productWidth = 33.3;
-
             }
 
             else if (productWidth == 33.3) {
-
                 productWidth = 25;
-
             }
-
 
             productsElements.forEach(
                 product => {
-
                     product.style.width =
                         productWidth + "%";
-
                 }
             );
 
-
             if (productWidth == 25) {
-
                 minusButton.style.display =
                     "none";
-
             }
-
 
             if (productWidth < 50) {
-
                 plusButton.style.display =
                     "block";
-
                 productsContainer.style.margin =
                     "0 auto 50px";
-
             }
-
         }
     );
-
 }
 
 async function loadMenu() {
     let menu = document.querySelector("#menu");
     let categoriesRes =
-        await fetch("https://pleaseno.onrender.com/categories");
+        await fetch("https://pleaseno.onrender.com/collections");
 
     let categories =
         await categoriesRes.json();
@@ -390,84 +343,56 @@ async function loadMenu() {
 }
 
 async function loadProducts() {
-
+    
     const params =
         new URLSearchParams(
             window.location.search
         );
 
-
     const category =
         params.get("category");
-
 
     const type =
         params.get("type");
 
-
     let url;
 
-
     if (category) {
-
         url =
             `https://pleaseno.onrender.com/products/category/${encodeURIComponent(category)}`;
-
     }
-
-
 
     else if (type) {
-
-        url =
-            `https://pleaseno.onrender.com/products/type/${encodeURIComponent(type)}`;
-
+        url = `https://pleaseno.onrender.com/products/type/${encodeURIComponent(type)}`;
     }
-
-
 
     else {
-
-        url =
-            "https://pleaseno.onrender.com/products";
-
+        url = "https://pleaseno.onrender.com/products";
     }
 
-
     try {
-
         let res =
             await fetch(url);
-
-
+        
         if (!res.ok) {
-
             throw new Error(
                 `HTTP error: ${res.status}`
             );
-
         }
-
 
         let data =
             await res.json();
 
-
         displayProducts(data);
-
     }
 
     catch (error) {
-
         console.error(
             "Error loading products:",
             error
         );
-
     }
-
 }
-
 
 
 loadProducts();
