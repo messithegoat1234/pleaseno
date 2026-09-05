@@ -126,7 +126,7 @@ a{
     height: 0;
     width: 200px;
     position: relative;
-    top: 175px;
+    top: 90px;
     color: black;
     margin-left: 20px;
     font-size: 20px;
@@ -160,7 +160,7 @@ a{
     height: 0;
     position: relative;
     margin-left: 20px;
-    top: 105px;
+    top: 3px;
 }
 
 .showMenuButton, .hideMenuButton{
