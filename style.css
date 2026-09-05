@@ -155,7 +155,7 @@ a{
     text-decoration: underline;
 }
 
-#showMenu{
+.showMenu{
     width: 0;
     height: 0;
     position: relative;
