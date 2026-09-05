@@ -342,6 +342,7 @@ async function loadMenu() {
 
     menu.innerHTML = "";
 
+    menu.innerHTML += "<p style='font-size: 40px;margin: 0; text-align: left; color: black;'>&gt;</p>"
     menu.innerHTML += "<p>COLLECTIONS</p>"
     categories.forEach(category => {
 
@@ -430,6 +431,19 @@ async function loadProducts() {
 
 }
 
+document.querySelector(".showMenuButton").addEventListener("click", function(){
+    document.querySelector("#menu").style.setProperty("right", "0")
+    document.querySelector(".showMenuButton").innerHTML = "<";
+    document.querySelector(".showMenuButton").classList.add('hideMenuButton');
+    document.querySelector(".hideMenuButton").classList.remove(".showMenuButton");
+});
+
+document.querySelector(".hideMenuButton").addEventListener("click", function(){
+    document.querySelector("#menu").style.setProperty("right", "0")
+    document.querySelector(".hideMenuButton").innerHTML = ">";
+    document.querySelector(".hideMenuButton").classList.add('hideMenuButton');
+    document.querySelector(".showMenuButton").classList.remove(".hideMenuButton");
+});
 
 loadProducts();
 loadMenu();
