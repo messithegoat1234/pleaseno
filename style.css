@@ -163,13 +163,22 @@ a{
     top: 105px;
 }
 
-#showMenuButton{
+.showMenuButton, .hideMenuButton{
     font-size: 40px;
     margin: 0;
     text-align: left;
     color: black;
     cursor: pointer;
 }
+
+.showMenuButton {
+    display: block;
+}
+
+.hideMenuButton {
+    display: none;
+}
+
 @media (max-width: 768px) {
     #products{
         margin: 50px auto 50px;
