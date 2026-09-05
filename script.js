@@ -342,7 +342,7 @@ async function loadMenu() {
 
     menu.innerHTML = "";
 
-
+    menu.innerHTML += "<p>COLLECTIONS</p>"
     categories.forEach(category => {
 
         let slug = slugify(category);
@@ -356,7 +356,7 @@ async function loadMenu() {
         `;
     });
 
-
+    menu.innerHTML += "<p>CATEGORIES</p>"
     types.forEach(type => {
         let slug = slugify(type);
         
