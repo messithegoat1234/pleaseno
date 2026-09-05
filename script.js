@@ -1,98 +1,166 @@
-async function displayProducts(data) {
+function displayProducts(data) {
 
     let container = document.querySelector("#products");
 
+    container.innerHTML = "";
+
+
     let products = {};
+
+
 
     data.forEach(item => {
 
         if (!products[item.website_name]) {
+
             products[item.website_name] = {
                 ...item,
                 colors: []
             };
+
         }
 
         products[item.website_name].colors.push(item);
+
     });
+
 
 
     Object.values(products).forEach(product => {
 
         let colorsHTML = "";
 
+
         product.colors.forEach(color => {
 
             let colorName = color.color;
 
-            if (colorName == "GRAY" || colorName == "GREY") {
+
+            if (
+                colorName == "GRAY" ||
+                colorName == "GREY"
+            ) {
+
                 colorName = "lightgrey";
+
             }
 
+
             if (colorName == "NAVY") {
+
                 colorName = "rgb(0, 48, 104)";
+
             }
+
 
             if (
                 (product.id == 19 || product.id == 20) &&
                 color.color == "BLUE"
             ) {
+
                 colorName = "lightblue";
+
             }
 
 
             colorsHTML += `
-                <span 
+                <span
                     class="color-dot"
-                    data-front="files_webp/${color.imagefront.replace(/\.[^/.]+$/, ".webp")}"
-                    data-back="files_webp/${color.imageback.replace(/\.[^/.]+$/, ".webp")}"
+
+                    data-front="files_webp/${color.imagefront.replace(
+                        /\.[^/.]+$/,
+                        ".webp"
+                    )}"
+
+                    data-back="files_webp/${color.imageback.replace(
+                        /\.[^/.]+$/,
+                        ".webp"
+                    )}"
+
                     data-name="${
                         product.website_name === "dachshund-flag-longsleeve" &&
                         color.color === "PINK"
+
                             ? "DACHSHUND FLAG WASHED LONGSLEEVE"
+
                             : product.name
                     }"
+
                     style="background-color: ${colorName.toLowerCase()}">
                 </span>
             `;
+
         });
 
 
+        let frontImage =
+            `files_webp/${product.imagefront.replace(
+                /\.[^/.]+$/,
+                ".webp"
+            )}`;
+
+
+        let backImage =
+            `files_webp/${product.imageback.replace(
+                /\.[^/.]+$/,
+                ".webp"
+            )}`;
+
+
         container.innerHTML += `
+
             <div class="product">
 
                 <div class="product-image">
 
-                    <a href="https://pleaseno.onrender.com/${product.website_name}">
-                        <img 
-                            src="files_webp/${product.imagefront.replace(/\.[^/.]+$/, ".webp")}"
+                    <a href="/${product.website_name}">
+
+                        <img
+
+                            src="${frontImage}"
+
                             loading="lazy"
+
                             decoding="async"
-                            data-front="files_webp/${product.imagefront.replace(/\.[^/.]+$/, ".webp")}"
-                            data-back="files_webp/${product.imageback.replace(/\.[^/.]+$/, ".webp")}"
+
+                            data-front="${frontImage}"
+
+                            data-back="${backImage}"
+
                         >
+
                     </a>
 
                 </div>
 
 
                 <div class="colors">
+
                     ${colorsHTML}
+
                 </div>
 
 
-                <a href="https://pleaseno.onrender.com/${product.website_name}">
+                <a href="/${product.website_name}">
+
                     <div class="description">
 
-                        <p class="name">${product.name}</p>
+                        <p class="name">
+                            ${product.name}
+                        </p>
 
-                        <p class="price">${product.price} PLN</p>
+                        <p class="price">
+                            ${product.price} PLN
+                        </p>
 
                     </div>
+
                 </a>
 
             </div>
+
         `;
+
     });
 
 
@@ -101,174 +169,275 @@ async function displayProducts(data) {
 
         dot.addEventListener("click", function() {
 
-            let product = this.closest(".product");
-
-            let img = product.querySelector(".product-image img");
-
-            let name = product.querySelector(".name");
+            let product =
+                this.closest(".product");
 
 
-            img.src = this.dataset.front;
-
-            img.dataset.front = this.dataset.front;
-
-            img.dataset.back = this.dataset.back;
-
-            name.textContent = this.dataset.name;
-
-        });
-
-    });
+            let img =
+                product.querySelector(
+                    ".product-image img"
+                );
 
 
-
-    document.querySelectorAll(".product-image img").forEach(img => {
-
-        img.addEventListener("mouseenter", () => {
-
-            img.src = img.dataset.back;
-
-        });
+            let name =
+                product.querySelector(".name");
 
 
-        img.addEventListener("mouseleave", () => {
+            img.src =
+                this.dataset.front;
 
-            img.src = img.dataset.front;
+
+            img.dataset.front =
+                this.dataset.front;
+
+
+            img.dataset.back =
+                this.dataset.back;
+
+
+            name.textContent =
+                this.dataset.name;
 
         });
 
     });
 
+
+
+    document.querySelectorAll(
+        ".product-image img"
+    ).forEach(img => {
+
+        img.addEventListener(
+            "mouseenter",
+            () => {
+
+                img.src =
+                    img.dataset.back;
+
+            }
+        );
+
+
+        img.addEventListener(
+            "mouseleave",
+            () => {
+
+                img.src =
+                    img.dataset.front;
+
+            }
+        );
+
+    });
 
 
     let productWidth = 25;
 
-    let plusButton = document.querySelector(".changeWidthPlus");
 
-    let minusButton = document.querySelector(".changeWidthMinus");
-
-    let productsElements = document.querySelectorAll(".product");
-
-    let productsContainer = document.querySelector("#products");
+    let plusButton =
+        document.querySelector(
+            ".changeWidthPlus"
+        );
 
 
-    plusButton.addEventListener("click", function() {
-
-        if (productWidth == 25) {
-
-            productWidth = 33.3;
-
-        } else if (productWidth == 33.3) {
-
-            productWidth = 50;
-
-        }
+    let minusButton =
+        document.querySelector(
+            ".changeWidthMinus"
+        );
 
 
-        productsElements.forEach(product => {
-
-            product.style.width = productWidth + "%";
-
-        });
-
-
-        if (productWidth == 50) {
-
-            plusButton.style.display = "none";
-
-            productsContainer.style.margin = "-70px auto 50px";
-
-        }
+    let productsElements =
+        document.querySelectorAll(
+            ".product"
+        );
 
 
-        if (productWidth > 25) {
-
-            minusButton.style.display = "block";
-
-        }
-
-    });
+    let productsContainer =
+        document.querySelector(
+            "#products"
+        );
 
 
-    minusButton.addEventListener("click", function() {
+    plusButton.addEventListener(
+        "click",
+        function() {
 
-        if (productWidth == 50) {
+            if (productWidth == 25) {
 
-            productWidth = 33.3;
+                productWidth = 33.3;
 
-        } else if (productWidth == 33.3) {
+            }
 
-            productWidth = 25;
+            else if (productWidth == 33.3) {
 
-        }
+                productWidth = 50;
 
-
-        productsElements.forEach(product => {
-
-            product.style.width = productWidth + "%";
-
-        });
+            }
 
 
-        if (productWidth == 25) {
+            productsElements.forEach(
+                product => {
 
-            minusButton.style.display = "none";
+                    product.style.width =
+                        productWidth + "%";
 
-        }
+                }
+            );
 
 
-        if (productWidth < 50) {
+            if (productWidth == 50) {
 
-            plusButton.style.display = "block";
+                plusButton.style.display =
+                    "none";
 
-            productsContainer.style.margin = "0 auto 50px";
+                productsContainer.style.margin =
+                    "-70px auto 50px";
+
+            }
+
+
+            if (productWidth > 25) {
+
+                minusButton.style.display =
+                    "block";
+
+            }
 
         }
-
-    });
-
-}
-
-
-
-async function showProducts() {
-
-    let res = await fetch(
-        "https://pleaseno.onrender.com/products"
     );
 
-    let data = await res.json();
 
-    displayProducts(data);
+    minusButton.addEventListener(
+        "click",
+        function() {
 
-}
+            if (productWidth == 50) {
+
+                productWidth = 33.3;
+
+            }
+
+            else if (productWidth == 33.3) {
+
+                productWidth = 25;
+
+            }
 
 
+            productsElements.forEach(
+                product => {
+
+                    product.style.width =
+                        productWidth + "%";
+
+                }
+            );
 
 
-async function show_by_category() {
+            if (productWidth == 25) {
 
-    let res = await fetch(
-        `https://pleaseno.onrender.com/collection/${category}`
+                minusButton.style.display =
+                    "none";
+
+            }
+
+
+            if (productWidth < 50) {
+
+                plusButton.style.display =
+                    "block";
+
+                productsContainer.style.margin =
+                    "0 auto 50px";
+
+            }
+
+        }
     );
 
-    let data = await res.json();
+}
 
-    displayProducts(data);
+
+async function loadProducts() {
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const category =
+        params.get("category");
+
+
+    const type =
+        params.get("type");
+
+
+    let url;
+
+
+    if (category) {
+
+        url =
+            `https://pleaseno.onrender.com/products/category/${encodeURIComponent(category)}`;
+
+    }
+
+
+
+    else if (type) {
+
+        url =
+            `https://pleaseno.onrender.com/products/type/${encodeURIComponent(type)}`;
+
+    }
+
+
+
+    else {
+
+        url =
+            "https://pleaseno.onrender.com/products";
+
+    }
+
+
+    try {
+
+        let res =
+            await fetch(url);
+
+
+        if (!res.ok) {
+
+            throw new Error(
+                `HTTP error: ${res.status}`
+            );
+
+        }
+
+
+        let data =
+            await res.json();
+
+
+        displayProducts(data);
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Error loading products:",
+            error
+        );
+
+    }
 
 }
 
 
 
-
-async function show_by_type() {
-
-    let res = await fetch(
-        `https://pleaseno.onrender.com/type/${type}`
-    );
-
-    let data = await res.json();
-
-    displayProducts(data);
-
-}
+loadProducts();
