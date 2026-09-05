@@ -249,7 +249,7 @@ async function showProducts() {
 async function show_by_category() {
 
     let res = await fetch(
-        `https://pleaseno.onrender.com/category/${category}`
+        `https://pleaseno.onrender.com/collection/${category}`
     );
 
     let data = await res.json();
