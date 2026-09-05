@@ -151,7 +151,7 @@ a{
     font-weight: bold;
 }
 
-#menu div:hover{
+.menuSection div:hover{
     text-decoration: underline;
 }
 
