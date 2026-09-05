@@ -107,7 +107,22 @@ def home():
         "index.html"
     )
 
+@app.route("/collections/<category>")
+def collection_page(category):
 
+    return send_from_directory(
+        BASE_DIR,
+        "index.html"
+    )
+
+
+@app.route("/types/<type>")
+def type_page(type):
+
+    return send_from_directory(
+        BASE_DIR,
+        "index.html"
+    )
 
 @app.route("/<website_name>")
 def product_page(website_name):
@@ -204,6 +219,8 @@ def show_products():
 @app.route("/products/collection/<category>")
 def show_products_by_category(category):
 
+    category = category.replace("-", " ").upper()
+
     query = PRODUCT_QUERY + """
         WHERE products.category = %s
     """
@@ -219,6 +236,8 @@ def show_products_by_category(category):
 
 @app.route("/products/type/<type>")
 def show_products_by_type(type):
+
+    type = type.replace("-", " ").upper()
 
     query = PRODUCT_QUERY + """
         WHERE products.type = %s
