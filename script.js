@@ -457,7 +457,8 @@ document.querySelector(".showMenuButton").addEventListener("click", function() {
 
     if (window.innerWidth <= 768) {
         document.querySelector("#menu").style.height = "550px";   
-        document.querySelector("#menu").style.display = "flex";   
+        document.querySelector("#menu").style.display = "flex";
+        document.querySelector("#menu").style.width = "50%"; 
     }
 });
 
