@@ -328,25 +328,25 @@ async function loadMenu() {
 
     let categories = await categoriesRes.json();
 
-    let typesRes = await fetch(
-        "https://pleaseno.onrender.com/types"
+    let categoriesRes = await fetch(
+        "https://pleaseno.onrender.com/categories"
     );
 
-    let types = await typesRes.json();
+    let categories = await categoriesRes.json();
 
 
+    let collectionsHTML = "";
     let categoriesHTML = "";
-    let typesHTML = "";
 
 
-    categories.forEach(category => {
+    collections.forEach(collection => {
 
-        let slug = slugify(category);
+        let slug = slugify(collection);
 
-        categoriesHTML += `
+        collectionsHTML += `
             <a href="/collections/${slug}">
                 <div class="menuOption">
-                    ${category}
+                    ${collection}
                 </div>
             </a>
         `;
@@ -354,14 +354,14 @@ async function loadMenu() {
     });
 
 
-    types.forEach(type => {
+    categories.forEach(category => {
 
-        let slug = slugify(type);
+        let slug = slugify(category);
 
-        typesHTML += `
-            <a href="/types/${slug}">
+        categoriesHTML += `
+            <a href="/categories/${slug}">
                 <div class="menuOption">
-                    ${type}
+                    ${category}
                 </div>
             </a>
         `;
@@ -375,16 +375,16 @@ async function loadMenu() {
 
             <p id='collectionsText'>COLLECTIONS</p>
 
-            ${categoriesHTML}
+            ${collectionsHTML}
 
         </div>
 
 
         <div class="menuSection">
 
-            <p id='categoriesText'>CATEGORIES</p>
+            <p id='iesText'>CATEGORIES</p>
 
-            ${typesHTML}
+            ${categoriesHTML}
 
         </div>
 
@@ -407,10 +407,10 @@ async function loadProducts() {
 
     }
 
-    else if (parts[0] === "types" && parts[1]) {
+    else if (parts[0] === "categories" && parts[1]) {
 
         url =
-            `https://pleaseno.onrender.com/products/type/${parts[1]}`;
+            `https://pleaseno.onrender.com/products/categories/${parts[1]}`;
 
     }
 
