@@ -1,7 +1,4 @@
-async function showProducts() {
-
-    let res = await fetch("https://pleaseno.onrender.com/products");
-    let data = await res.json();
+async function displayProducts(data) {
 
     let container = document.querySelector("#products");
 
@@ -19,7 +16,7 @@ async function showProducts() {
         products[item.website_name].colors.push(item);
     });
 
-    
+
     Object.values(products).forEach(product => {
 
         let colorsHTML = "";
@@ -36,9 +33,13 @@ async function showProducts() {
                 colorName = "rgb(0, 48, 104)";
             }
 
-            if ((product.id == 19 || product.id == 20) && color.color == "BLUE") {
+            if (
+                (product.id == 19 || product.id == 20) &&
+                color.color == "BLUE"
+            ) {
                 colorName = "lightblue";
             }
+
 
             colorsHTML += `
                 <span 
@@ -74,20 +75,26 @@ async function showProducts() {
 
                 </div>
 
+
                 <div class="colors">
                     ${colorsHTML}
                 </div>
 
+
                 <a href="https://pleaseno.onrender.com/${product.website_name}">
-                    <div class='description'>
-                        <p class='name'>${product.name}</p>
-                        <p class='price'>${product.price} PLN</p>
+                    <div class="description">
+
+                        <p class="name">${product.name}</p>
+
+                        <p class="price">${product.price} PLN</p>
+
                     </div>
                 </a>
 
             </div>
         `;
     });
+
 
 
     document.querySelectorAll(".color-dot").forEach(dot => {
@@ -100,9 +107,11 @@ async function showProducts() {
 
             let name = product.querySelector(".name");
 
+
             img.src = this.dataset.front;
 
             img.dataset.front = this.dataset.front;
+
             img.dataset.back = this.dataset.back;
 
             name.textContent = this.dataset.name;
@@ -112,70 +121,154 @@ async function showProducts() {
     });
 
 
+
     document.querySelectorAll(".product-image img").forEach(img => {
 
         img.addEventListener("mouseenter", () => {
+
             img.src = img.dataset.back;
+
         });
 
+
         img.addEventListener("mouseleave", () => {
+
             img.src = img.dataset.front;
+
         });
 
     });
-    
+
+
+
     let productWidth = 25;
 
-	document.querySelector(".changeWidthPlus").addEventListener("click", function() {
-			
-    	if (productWidth == 25) {
-        	productWidth = 33.3;
-    	} 
-    	else if (productWidth == 33.3) {
-        	productWidth = 50;
-    	}
+    let plusButton = document.querySelector(".changeWidthPlus");
 
-    	document.querySelectorAll(".product").forEach(product => {
-        	product.style.width = productWidth + "%";
-    	});
+    let minusButton = document.querySelector(".changeWidthMinus");
 
-    	if (productWidth == 50) {
-        	document.querySelector(".changeWidthPlus").style.display = "none";
-			document.querySelector("#products").style.margin = "-70px auto 50px";
-    	}
+    let productsElements = document.querySelectorAll(".product");
 
-    	if (productWidth > 25) {
-        	document.querySelector(".changeWidthMinus").style.display = "block";
-    	}
-
-	});
+    let productsContainer = document.querySelector("#products");
 
 
-	document.querySelector(".changeWidthMinus").addEventListener("click", function() {
+    plusButton.addEventListener("click", function() {
 
-    	if (productWidth == 50) {
-        	productWidth = 33.3;
-    	} 
-    	else if (productWidth == 33.3) {
-        	productWidth = 25;
-    	}
+        if (productWidth == 25) {
 
-    	document.querySelectorAll(".product").forEach(product => {
-        	product.style.width = productWidth + "%";
-    	});
+            productWidth = 33.3;
 
-    	if (productWidth == 25) {
-        	document.querySelector(".changeWidthMinus").style.display = "none";
-    	}
+        } else if (productWidth == 33.3) {
 
-    	if (productWidth < 50) {
-       	 	document.querySelector(".changeWidthPlus").style.display = "block";
-			document.querySelector("#products").style.margin = "0 auto 50px";
-    	}
+            productWidth = 50;
 
-	});
+        }
 
-                                                                
+
+        productsElements.forEach(product => {
+
+            product.style.width = productWidth + "%";
+
+        });
+
+
+        if (productWidth == 50) {
+
+            plusButton.style.display = "none";
+
+            productsContainer.style.margin = "-70px auto 50px";
+
+        }
+
+
+        if (productWidth > 25) {
+
+            minusButton.style.display = "block";
+
+        }
+
+    });
+
+
+    minusButton.addEventListener("click", function() {
+
+        if (productWidth == 50) {
+
+            productWidth = 33.3;
+
+        } else if (productWidth == 33.3) {
+
+            productWidth = 25;
+
+        }
+
+
+        productsElements.forEach(product => {
+
+            product.style.width = productWidth + "%";
+
+        });
+
+
+        if (productWidth == 25) {
+
+            minusButton.style.display = "none";
+
+        }
+
+
+        if (productWidth < 50) {
+
+            plusButton.style.display = "block";
+
+            productsContainer.style.margin = "0 auto 50px";
+
+        }
+
+    });
+
 }
 
-showProducts();
+
+
+async function showProducts() {
+
+    let res = await fetch(
+        "https://pleaseno.onrender.com/products"
+    );
+
+    let data = await res.json();
+
+    displayProducts(data);
+
+}
+
+
+
+
+async function show_by_category() {
+
+    let res = await fetch(
+        `https://pleaseno.onrender.com/category/${category}`
+    );
+
+    let data = await res.json();
+
+    displayProducts(data);
+
+}
+
+
+
+
+async function show_by_type() {
+
+    let res = await fetch(
+        `https://pleaseno.onrender.com/type/${type}`
+    );
+
+    let data = await res.json();
+
+    displayProducts(data);
+
+}
