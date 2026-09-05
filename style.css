@@ -115,6 +115,8 @@ a{
     max-width: 1400px;
     margin: auto;
     z-index: 999999999 !important;
+    text-align: center;
+    justify-content: end;
 }
 
 .changeWidthMinus {
