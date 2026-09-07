@@ -44,9 +44,11 @@ function displayProducts(data) {
 
 
             if (colorName == "NAVY") {
-
                 colorName = "rgb(0, 48, 104)";
+            }
 
+            if (colorName == "BLUE") {
+                colorName = "#66B2FF";
             }
 
 
