@@ -28,7 +28,7 @@ async function showProduct() {
 
     if (
         product.website_name === "dachshund-flag-tee" &&
-        choice === "CAMO"
+         choice === "CAMO"
     ) {
         product.description = "UNISEX\n240GSM\n100% COTTON\nOVERSIZED";
         product.sizes = "S M L XL 2XL";
@@ -45,7 +45,7 @@ async function showProduct() {
 
     if (
         product.website_name === "warning-sign-tee" &&
-        choice === "BLACK" || choice === "WHITE" || choice === "GREY"
+        (choice === "BLACK" || choice === "WHITE" || choice === "GREY")
     ) {
         product.description =
             "UNISEX\n230GSM\n100% COTTON\nOVERSIZED";
@@ -165,12 +165,12 @@ async function showProduct() {
 
 
             if (
-                product.website_name === "warning-sign-tee" &&
-                choice === "BLACK" || choice === "WHITE" || choice === "GREY"
+                selectedProduct.website_name === "warning-sign-tee" &&
+                (choice === "BLACK" || choice === "WHITE" || choice === "GREY")
             ) {
-                product.description =
+                description =
                         "UNISEX\n230GSM\n100% COTTON\nOVERSIZED";
-                product.sizes = "XS S M L XL 2XL 3XL"
+                sizes = "XS S M L XL 2XL 3XL"
             }            
 
             
