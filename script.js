@@ -61,7 +61,7 @@ function displayProducts(data) {
                 color.color == "BLUE"
             ) {
 
-                 = "lightblue";
+                 colorName = "lightblue";
 
             }
 
