@@ -51,13 +51,17 @@ function displayProducts(data) {
                 colorName = "#66B2FF";
             }
 
+            if (colorName == "APRICOT") {
+                colorName = "#F5E0C2";
+            }
+
 
             if (
                 (product.id == 19 || product.id == 20) &&
                 color.color == "BLUE"
             ) {
 
-                colorName = "lightblue";
+                 = "lightblue";
 
             }
 
